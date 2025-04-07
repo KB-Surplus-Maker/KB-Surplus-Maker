@@ -10,12 +10,19 @@
     <div class="flex-grow-1 p-4">
       <router-view />
     </div>
-    <div>
-      {{ curMonthTransactionList }}
-    </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { useTransactionStore } from './stores/transactions';
+import SideBar from './components/SideBar.vue';
+
+const transactionStore = useTransactionStore();
+
+const getTransactionList = transactionStore.fetchTransactionListByUserId;
+
+getTransactionList('user1');
+console.log('끝');
+</script>
 
 <style></style>
