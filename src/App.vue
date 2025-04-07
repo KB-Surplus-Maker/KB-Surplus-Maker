@@ -10,16 +10,12 @@
     <div class="flex-grow-1 p-4">
       <router-view />
     </div>
+    <div>
+      {{ curMonthTransactionList }}
+    </div>
   </div>
 </template>
 
-<script setup>
-import TransactionMapper from '@/mapper/TransactionMapper.js';
-import UserMapper from '@/mapper/UserMapper.js';
-import SideBar from './components/SideBar.vue';
-
-// console.log(UserMapper.getUserById('user1'));
-// console.log(TransactionMapper.getTransactionByUserId('user1'));
-</script>
+<script setup></script>
 
 <style></style>

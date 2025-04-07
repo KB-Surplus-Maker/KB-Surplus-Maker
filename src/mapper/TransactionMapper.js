@@ -10,7 +10,7 @@ class TransactionMapper {
     return TransactionMapper.instance;
   }
 
-  async getTransactionByUserId(userId) {
+  async getTransactionListByUserId(userId) {
     try {
       const response = await axios.get(this.baseURI + '?userId=' + userId);
       if (response.status === 200) {
