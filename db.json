@@ -2,11 +2,12 @@
   "users": [
     {
       "id": "user1",
-      "name": "Alex",
+      "name": "Alexa",
       "email": "alex@example.com",
       "birth": "2001-04-14",
       "password": "1234",
-      "phone": "010-1234-5678"
+      "phone": "010-1234-5678",
+      "profileImage": "profile1.png"
     },
     {
       "id": "user2",
@@ -14,7 +15,8 @@
       "email": "jamie@example.com",
       "birth": "2001-04-14",
       "password": "1234",
-      "phone": "010-1111-1111"
+      "phone": "010-1111-1111",
+      "profileImage": "src"
     },
     {
       "id": "user3",
@@ -22,14 +24,19 @@
       "email": "taylor@example.com",
       "birth": "2001-04-14",
       "password": "1234",
-      "phone": "010-1111-1111"
+      "phone": "010-1111-1111",
+      "profileImage": "src"
     }
   ],
   "transactions": [
     {
       "id": "txn001",
       "userId": "user1",
-      "date": { "year": "2025", "month": "04", "day": "01" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "01"
+      },
       "type": "expense",
       "price": 12000,
       "category": "food",
@@ -38,7 +45,11 @@
     {
       "id": "txn002",
       "userId": "user2",
-      "date": { "year": "2025", "month": "04", "day": "01" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "01"
+      },
       "type": "income",
       "price": 300000,
       "category": "salary",
@@ -47,7 +58,11 @@
     {
       "id": "txn003",
       "userId": "user3",
-      "date": { "year": "2025", "month": "04", "day": "02" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "02"
+      },
       "type": "expense",
       "price": 4500,
       "category": "transport",
@@ -56,7 +71,11 @@
     {
       "id": "txn004",
       "userId": "user1",
-      "date": { "year": "2025", "month": "04", "day": "02" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "02"
+      },
       "type": "expense",
       "price": 25000,
       "category": "shopping",
@@ -65,7 +84,11 @@
     {
       "id": "txn005",
       "userId": "user2",
-      "date": { "year": "2025", "month": "04", "day": "03" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "03"
+      },
       "type": "expense",
       "price": 8900,
       "category": "food",
@@ -74,7 +97,11 @@
     {
       "id": "txn006",
       "userId": "user3",
-      "date": { "year": "2025", "month": "04", "day": "03" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "03"
+      },
       "type": "income",
       "price": 100000,
       "category": "investment",
@@ -83,7 +110,11 @@
     {
       "id": "txn007",
       "userId": "user1",
-      "date": { "year": "2025", "month": "04", "day": "03" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "03"
+      },
       "type": "expense",
       "price": 3000,
       "category": "transport",
@@ -92,7 +123,11 @@
     {
       "id": "txn008",
       "userId": "user2",
-      "date": { "year": "2025", "month": "04", "day": "04" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "04"
+      },
       "type": "income",
       "price": 150000,
       "category": "salary",
@@ -101,7 +136,11 @@
     {
       "id": "txn009",
       "userId": "user3",
-      "date": { "year": "2025", "month": "04", "day": "04" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "04"
+      },
       "type": "expense",
       "price": 7000,
       "category": "food",
@@ -110,7 +149,11 @@
     {
       "id": "txn010",
       "userId": "user1",
-      "date": { "year": "2025", "month": "04", "day": "05" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "05"
+      },
       "type": "expense",
       "price": 19000,
       "category": "entertainment",
@@ -119,7 +162,11 @@
     {
       "id": "txn011",
       "userId": "user2",
-      "date": { "year": "2025", "month": "04", "day": "05" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "05"
+      },
       "type": "expense",
       "price": 21000,
       "category": "shopping",
@@ -128,7 +175,11 @@
     {
       "id": "txn012",
       "userId": "user3",
-      "date": { "year": "2025", "month": "04", "day": "05" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "05"
+      },
       "type": "income",
       "price": 80000,
       "category": "investment",
@@ -137,7 +188,11 @@
     {
       "id": "txn013",
       "userId": "user1",
-      "date": { "year": "2025", "month": "04", "day": "06" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "06"
+      },
       "type": "expense",
       "price": 14000,
       "category": "food",
@@ -146,7 +201,11 @@
     {
       "id": "txn014",
       "userId": "user2",
-      "date": { "year": "2025", "month": "04", "day": "06" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "06"
+      },
       "type": "expense",
       "price": 5000,
       "category": "transport",
@@ -155,7 +214,11 @@
     {
       "id": "txn015",
       "userId": "user3",
-      "date": { "year": "2025", "month": "04", "day": "06" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "06"
+      },
       "type": "income",
       "price": 50000,
       "category": "etc",
@@ -164,7 +227,11 @@
     {
       "id": "txn016",
       "userId": "user1",
-      "date": { "year": "2025", "month": "04", "day": "07" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "07"
+      },
       "type": "expense",
       "price": 16000,
       "category": "entertainment",
@@ -173,7 +240,11 @@
     {
       "id": "txn017",
       "userId": "user2",
-      "date": { "year": "2025", "month": "04", "day": "07" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "07"
+      },
       "type": "income",
       "price": 120000,
       "category": "salary",
@@ -182,7 +253,11 @@
     {
       "id": "txn018",
       "userId": "user3",
-      "date": { "year": "2025", "month": "04", "day": "07" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "07"
+      },
       "type": "expense",
       "price": 24000,
       "category": "shopping",
@@ -191,7 +266,11 @@
     {
       "id": "txn019",
       "userId": "user1",
-      "date": { "year": "2025", "month": "04", "day": "07" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "07"
+      },
       "type": "income",
       "price": 90000,
       "category": "etc",
@@ -200,7 +279,11 @@
     {
       "id": "txn020",
       "userId": "user2",
-      "date": { "year": "2025", "month": "04", "day": "07" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "07"
+      },
       "type": "expense",
       "price": 6000,
       "category": "food",
