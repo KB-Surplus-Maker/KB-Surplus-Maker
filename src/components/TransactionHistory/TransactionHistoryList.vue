@@ -1,9 +1,223 @@
-<<<<<<< HEAD
-<template></template>
-=======
 <template>
-  <table></table>
+  <div class="container">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <td>날짜</td>
+          <td>분류</td>
+          <td>금액</td>
+          <td>카테고리</td>
+          <td>메모</td>
+        </tr>
+      </thead>
+      <tbody>
+        <TransactionHistoryItems
+          v-for="item in filteredData"
+          :key="item.id"
+          :item="item"
+        ></TransactionHistoryItems>
+      </tbody>
+    </table>
+  </div>
 </template>
->>>>>>> origin/transaction-history
 
-<script setup></script>
+<script setup>
+import TransactionHistoryItems from './TransactionHistoryItems.vue';
+import { computed } from 'vue';
+import { defineProps } from 'vue';
+
+const props = defineProps({
+  selectedCategory: {
+    type: String,
+    default: 'all',
+  },
+});
+const filteredData = computed(() => {
+  if (props.selectedCategory === 'all') return tableData;
+  return tableData.filter((item) => item.category === props.selectedCategory);
+});
+const tableData = [
+  {
+    id: 'txn001',
+    userId: 'user1',
+    date: { year: '2025', month: '04', day: '01' },
+    type: 'expense',
+    price: 12000,
+    category: 'food',
+    memo: '점심 식사',
+  },
+  {
+    id: 'txn002',
+    userId: 'user2',
+    date: { year: '2025', month: '04', day: '01' },
+    type: 'income',
+    price: 300000,
+    category: 'salary',
+    memo: '프리랜서 급여',
+  },
+  {
+    id: 'txn003',
+    userId: 'user3',
+    date: { year: '2025', month: '04', day: '02' },
+    type: 'expense',
+    price: 4500,
+    category: 'transport',
+    memo: '지하철 요금',
+  },
+  {
+    id: 'txn004',
+    userId: 'user1',
+    date: { year: '2025', month: '04', day: '02' },
+    type: 'expense',
+    price: 25000,
+    category: 'shopping',
+    memo: '문구류 구매',
+  },
+  {
+    id: 'txn005',
+    userId: 'user2',
+    date: { year: '2025', month: '04', day: '03' },
+    type: 'expense',
+    price: 8900,
+    category: 'food',
+    memo: '간식',
+  },
+  {
+    id: 'txn006',
+    userId: 'user3',
+    date: { year: '2025', month: '04', day: '03' },
+    type: 'income',
+    price: 100000,
+    category: 'investment',
+    memo: '주식 수익',
+  },
+  {
+    id: 'txn007',
+    userId: 'user1',
+    date: { year: '2025', month: '04', day: '03' },
+    type: 'expense',
+    price: 3000,
+    category: 'transport',
+    memo: '버스 요금',
+  },
+  {
+    id: 'txn008',
+    userId: 'user2',
+    date: { year: '2025', month: '04', day: '04' },
+    type: 'income',
+    price: 150000,
+    category: 'salary',
+    memo: '단기 계약금',
+  },
+  {
+    id: 'txn009',
+    userId: 'user3',
+    date: { year: '2025', month: '04', day: '04' },
+    type: 'expense',
+    price: 7000,
+    category: 'food',
+    memo: '카페',
+  },
+  {
+    id: 'txn010',
+    userId: 'user1',
+    date: { year: '2025', month: '04', day: '05' },
+    type: 'expense',
+    price: 19000,
+    category: 'entertainment',
+    memo: '영화 관람',
+  },
+  {
+    id: 'txn011',
+    userId: 'user2',
+    date: { year: '2025', month: '04', day: '05' },
+    type: 'expense',
+    price: 21000,
+    category: 'shopping',
+    memo: '화장품',
+  },
+  {
+    id: 'txn012',
+    userId: 'user3',
+    date: { year: '2025', month: '04', day: '05' },
+    type: 'income',
+    price: 80000,
+    category: 'investment',
+    memo: '비트코인 수익',
+  },
+  {
+    id: 'txn013',
+    userId: 'user1',
+    date: { year: '2025', month: '04', day: '06' },
+    type: 'expense',
+    price: 14000,
+    category: 'food',
+    memo: '저녁식사',
+  },
+  {
+    id: 'txn014',
+    userId: 'user2',
+    date: { year: '2025', month: '04', day: '06' },
+    type: 'expense',
+    price: 5000,
+    category: 'transport',
+    memo: '택시비',
+  },
+  {
+    id: 'txn015',
+    userId: 'user3',
+    date: { year: '2025', month: '04', day: '06' },
+    type: 'income',
+    price: 50000,
+    category: 'etc',
+    memo: '중고물품 판매',
+  },
+  {
+    id: 'txn016',
+    userId: 'user1',
+    date: { year: '2025', month: '04', day: '07' },
+    type: 'expense',
+    price: 16000,
+    category: 'entertainment',
+    memo: '콘서트 티켓',
+  },
+  {
+    id: 'txn017',
+    userId: 'user2',
+    date: { year: '2025', month: '04', day: '07' },
+    type: 'income',
+    price: 120000,
+    category: 'salary',
+    memo: '보너스',
+  },
+  {
+    id: 'txn018',
+    userId: 'user3',
+    date: { year: '2025', month: '04', day: '07' },
+    type: 'expense',
+    price: 24000,
+    category: 'shopping',
+    memo: '운동화 구매',
+  },
+  {
+    id: 'txn019',
+    userId: 'user1',
+    date: { year: '2025', month: '04', day: '07' },
+    type: 'income',
+    price: 90000,
+    category: 'etc',
+    memo: '현금 선물',
+  },
+  {
+    id: 'txn020',
+    userId: 'user2',
+    date: { year: '2025', month: '04', day: '07' },
+    type: 'expense',
+    price: 6000,
+    category: 'food',
+    memo: '편의점',
+  },
+];
+</script>
+
+<style></style>
