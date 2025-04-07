@@ -3,9 +3,11 @@
     <h2>월별 카테고리별 지출 도넛 차트</h2>
     <canvas ref="doughnutCanvas"></canvas>
   </div>
+  <div>{{ filteredData }}</div>
 </template>
 
 <script setup>
+// import TransactionMapper from '@/mapper/TransactionMapper.js';
 import { onMounted, ref, computed } from 'vue';
 import {
   Chart,
@@ -14,26 +16,16 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { useTransactionStore } from '@/stores/transactionStore';
 import { storeToRefs } from 'pinia';
+import { useTransactionStore } from '@/stores/transactions';
 
 // Chart.js 등록
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
 
 const doughnutCanvas = ref(null);
 const transactionStore = useTransactionStore();
-const { transactions } = storeToRefs(transactionStore);
 
-const filteredData = computed(() => {
-  // 이번 달만 필터링
-  const now = new Date();
-  return transactions.value.filter(
-    (t) =>
-      t.type === 'expense' &&
-      t.date.year == now.getFullYear() &&
-      t.date.month == String(now.getMonth() + 1).padStart(2, '0')
-  );
-});
+const filteredData = computed(() => transactionStore.curMonthTransactionList);
 
 const categoryData = computed(() => {
   const data = {};
@@ -43,8 +35,8 @@ const categoryData = computed(() => {
   return data;
 });
 
-onMounted(async () => {
-  await transactionStore.fetchTransactions();
+onMounted(() => {
+  console.log('진입');
 
   new Chart(doughnutCanvas.value, {
     type: 'doughnut',
