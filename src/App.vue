@@ -11,15 +11,41 @@
       <router-view />
     </div>
   </div>
+
+  <!-- <div class="app-container">
+    <div class="text-center">
+      <button class="btn btn-primary" @click="showForm = true">
+        거래 추가
+      </button>
+    </div>
+
+    <TransactionForm
+      v-if="showForm"
+      @close="showForm = false"
+      @refresh="handleRefresh"
+    />
+  </div> -->
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import TransactionMapper from '@/mapper/TransactionMapper.js';
 import UserMapper from '@/mapper/UserMapper.js';
 import SideBar from './components/SideBar.vue';
+import TransactionForm from './pages/TransactionForm.vue';
 
+const showForm = ref(false);
+
+const handleRefresh = () => {
+  alert('거래 내역이 새로고침되었습니다!');
+  showForm.value = false;
+};
 // console.log(UserMapper.getUserById('user1'));
 // console.log(TransactionMapper.getTransactionByUserId('user1'));
 </script>
 
-<style></style>
+<style>
+body {
+  background-color: #f4f8fb;
+}
+</style>
