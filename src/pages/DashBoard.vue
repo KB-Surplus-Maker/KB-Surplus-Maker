@@ -1,5 +1,10 @@
 <template>
   <div class="container mt-5">
+    <div class="row">
+      <div class="col-12">
+        <MonthSelector />
+      </div>
+    </div>
     <!-- 상단 차트 영역 -->
     <div class="row mb-4">
       <div class="col-12 col-md-6 mb-4">
@@ -32,6 +37,7 @@ import TransactionList from '@/components/TransactionList.vue';
 import LineChart from '@/components/LineChart.vue';
 import { useTransactionStore } from '@/stores/transactions';
 import { computed, reactive } from 'vue';
+import MonthSelector from '@/components/MonthSelector.vue';
 
 const transactionsStore = useTransactionStore();
 const curMonthExpenses = computed(() => transactionsStore.curMonthExpenseList);
@@ -44,10 +50,9 @@ const chartData = computed(() => {
   }
 
   curMonthExpenses.value.forEach((trans) => {
-    const day = trans.date.day;
-    const label = day;
+    const day = parseInt(trans.date.day);
 
-    dailyExpenses[label] += trans.price;
+    dailyExpenses[day] += trans.price;
   });
 
   const labels = Array.from({ length: 31 }, (_, i) => `${i + 1}일`);
@@ -57,7 +62,7 @@ const chartData = computed(() => {
     labels: labels,
     datasets: [
       {
-        label: '일별 지출 금액',
+        label: '일별 지출내역',
         data: data,
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
@@ -69,13 +74,14 @@ const chartData = computed(() => {
 
 const chartOptions = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       display: true,
     },
     title: {
       display: true,
-      text: '일별 지출 금액',
+      text: '일별 지출 내역',
     },
   },
 };

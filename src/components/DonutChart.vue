@@ -1,6 +1,6 @@
 <template>
   <div class="chart-wrapper">
-    <h3>월별 카테고리별 지출 도넛 차트</h3>
+    <h6>카테고리별 지출</h6>
     <canvas ref="doughnutCanvas"></canvas>
   </div>
 </template>

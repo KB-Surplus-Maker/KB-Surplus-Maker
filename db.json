@@ -354,6 +354,71 @@
       "price": 10000,
       "category": "식비",
       "memo": "밥"
+    },
+    {
+      "id": "txn1744092163861",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "08"
+      },
+      "type": "expense",
+      "price": 1000,
+      "category": "식비",
+      "memo": "밥2"
+    },
+    {
+      "id": "txn1744093427448",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "03"
+      },
+      "type": "expense",
+      "price": 5000,
+      "category": "식비",
+      "memo": "밥밥밥"
+    },
+    {
+      "id": "txn1744093933838",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "03"
+      },
+      "type": "expense",
+      "price": 50000,
+      "category": "식비",
+      "memo": "밥이다 밥"
+    },
+    {
+      "id": "txn1744093991868",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "08"
+      },
+      "type": "expense",
+      "price": 5000,
+      "category": "교통",
+      "memo": "교통"
+    },
+    {
+      "id": "txn1744093991868",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "03",
+        "day": "08"
+      },
+      "type": "expense",
+      "price": 5000,
+      "category": "교통",
+      "memo": "교통"
     }
   ]
 }
