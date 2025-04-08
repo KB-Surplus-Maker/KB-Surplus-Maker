@@ -1,8 +1,8 @@
-import { defineStore } from 'pinia';
-import { reactive, computed } from 'vue';
-import TransactionMapper from '@/mapper/TransactionMapper.js';
+import { defineStore } from "pinia";
+import { reactive, computed } from "vue";
+import TransactionMapper from "@/mapper/TransactionMapper.js";
 
-export const useTransactionStore = defineStore('transactions', () => {
+export const useTransactionStore = defineStore("transactions", () => {
   let today = new Date();
   // console.log(typeof today.getMonth());
   const states = reactive({
@@ -28,7 +28,7 @@ export const useTransactionStore = defineStore('transactions', () => {
   const curMonthExpenseList = computed(() => {
     const filtered = states.transactionList.filter(
       (transaction) =>
-        transaction.type === 'expense' &&
+        transaction.type === "expense" &&
         parseInt(transaction.date.month) === states.currentMonth &&
         parseInt(transaction.date.year) === states.currentYear
     );
@@ -38,7 +38,9 @@ export const useTransactionStore = defineStore('transactions', () => {
 
   const curMonthTransactionList2 = computed(() => {
     const filtered = states.transactionList.filter(
-      (transaction) => parseInt(transaction.date.month) === states.currentMonth
+      (transaction) =>
+        parseInt(transaction.date.month) === states.currentMonth &&
+        parseInt(transaction.date.year) === states.currentYear
     );
 
     return filtered;
@@ -62,13 +64,9 @@ export const useTransactionStore = defineStore('transactions', () => {
     }
   };
 
-  const curYear = computed(() => {
-    return states.currentYear;
-  });
+  const curYear = computed(() => states.currentYear);
 
-  const curMonth = computed(() => {
-    return states.currentMonth;
-  });
+  const curMonth = computed(() => states.currentMonth);
 
   return {
     ...states,

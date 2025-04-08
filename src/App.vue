@@ -7,10 +7,13 @@
     >
       <SideBar />
     </div>
+
+    <!-- Main Content -->
     <div class="flex-grow-1 p-4">
       <router-view />
     </div>
 
+    <!-- Floating Add Button -->
     <div class="home">
       <AddButton @click="openModal" />
       <TransactionForm :show="showModal" @close="closeModal" />
@@ -19,21 +22,32 @@
 </template>
 
 <script setup>
-import { useTransactionStore } from './stores/transactions';
-import { ref } from 'vue';
-import SideBar from './components/SideBar.vue';
-import TransactionForm from './components/TransactionForm.vue';
-import AddButton from './components/AddButton.vue';
+import { ref, watch } from "vue";
+import { useTransactionStore } from "./stores/transactions";
+import { useUserStore } from "./stores/userStore";
+import SideBar from "./components/SideBar.vue";
+import TransactionForm from "./pages/TransactionForm.vue";
+import AddButton from "./components/AddButton.vue";
 
+// 스토어 불러오기
 const transactionStore = useTransactionStore();
+const userStore = useUserStore();
 
-const getTransactionListByUserId =
-  transactionStore.fetchTransactionListByUserId;
-
+// 모달 상태 관리
 const showModal = ref(false);
 const openModal = () => (showModal.value = true);
 const closeModal = () => (showModal.value = false);
-getTransactionListByUserId('user1');
+
+// ✅ 로그인된 사용자의 ID 기반으로 거래내역 불러오기
+watch(
+  () => userStore.currentUser?.id,
+  (userId) => {
+    if (userId) {
+      transactionStore.fetchTransactionListByUserId(userId);
+    }
+  },
+  { immediate: true } // 앱 시작 시 바로 실행
+);
 </script>
 
 <style>
