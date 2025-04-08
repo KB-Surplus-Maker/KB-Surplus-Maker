@@ -5,6 +5,11 @@
         <MonthSelector />
       </div>
     </div>
+    <div class="row mb-4">
+      <div class="col-12">
+        <Summary />
+      </div>
+    </div>
     <!-- 상단 차트 영역 -->
     <div class="row mb-4">
       <div class="col-12 col-md-6 mb-4">
@@ -38,6 +43,7 @@ import LineChart from '@/components/LineChart.vue';
 import { useTransactionStore } from '@/stores/transactions';
 import { computed, reactive } from 'vue';
 import MonthSelector from '@/components/MonthSelector.vue';
+import Summary from '@/components/Summary.vue';
 
 const transactionsStore = useTransactionStore();
 const curMonthExpenses = computed(() => transactionsStore.curMonthExpenseList);
