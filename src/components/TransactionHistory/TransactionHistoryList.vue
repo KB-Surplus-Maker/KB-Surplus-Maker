@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 <template>
   <div class="container">
     <table class="table table-hover">
@@ -140,6 +141,11 @@ const requestAPI = async () => {
 <style></style>
 =======
 <template></template>
+=======
+<template>
+  <table></table>
+</template>
+>>>>>>> c8e7baa (create db.json)
 
 <script setup></script>
 >>>>>>> caafb8d (add components)
