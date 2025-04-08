@@ -1,7 +1,15 @@
 <template>
   <div class="container">
     <div>
-      <!-- 여기  -->
+      <div class="d-flex justify-content-center align-items-center my-3 gap-3">
+        <button class="btn btn-outline-secondary" @click="changeMonth(-1)">
+          ←
+        </button>
+        <div class="fs-5">{{ formattedYearMonth }}</div>
+        <button class="btn btn-outline-secondary" @click="changeMonth(1)">
+          →
+        </button>
+      </div>
     </div>
     <div class="d-flex justify-content-between align-items-center my-3">
       <div class="fs-3">상세 내역</div>
@@ -38,6 +46,7 @@
     <hr />
     <TransactionHistoryList
       :selectedCategory="selectedCategory"
+      :yearMonth="formattedYearMonth"
       @update:tableData="updateTableData"
       @update:categories="updateCategories"
     ></TransactionHistoryList>
@@ -68,6 +77,23 @@ const updateTableData = (data) => {
 
 const updateCategories = (categories) => {
   uniqueCategories.value = categories;
+};
+
+// 최상단 년월 로직
+const currentDate = ref(new Date());
+
+// 현재 연도와 월을 'YYYY.MM' 형식으로 출력
+const formattedYearMonth = computed(() => {
+  const year = currentDate.value.getFullYear();
+  const month = String(currentDate.value.getMonth() + 1).padStart(2, '0');
+  return `${year}.${month}`;
+});
+
+// 이전 또는 다음 달로 이동
+const changeMonth = (offset) => {
+  const newDate = new Date(currentDate.value);
+  newDate.setMonth(newDate.getMonth() + offset);
+  currentDate.value = newDate;
 };
 </script>
 <style scoped>

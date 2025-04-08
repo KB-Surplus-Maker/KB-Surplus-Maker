@@ -64,24 +64,35 @@ const props = defineProps({
     type: String,
     default: 'all',
   },
+  yearMonth: {
+    type: String,
+    required: true,
+  },
 });
 
 const currentPage = ref(1);
 const itemsPerPage = 15;
 
 const filteredData = computed(() => {
-  const filtered =
+  const [yearStr, monthStr] = props.yearMonth.split('.');
+  const year = parseInt(yearStr);
+  const month = parseInt(monthStr);
+
+  const monthFiltered = tableData.value.filter((item) => {
+    return item.date.year == year && item.date.month == month;
+  });
+
+  const categoryFiltered =
     props.selectedCategory === 'all'
-      ? tableData.value
-      : tableData.value.filter(
+      ? monthFiltered
+      : monthFiltered.filter(
           (item) => item.category === props.selectedCategory
         );
 
-  // 날짜 기준 내림차순 정렬 (최신순)
-  return filtered.slice().sort((a, b) => {
+  return categoryFiltered.slice().sort((a, b) => {
     const dateA = new Date(`${a.date.year}-${a.date.month}-${a.date.day}`);
     const dateB = new Date(`${b.date.year}-${b.date.month}-${b.date.day}`);
-    return dateB - dateA; // 최신 날짜가 먼저 오게
+    return dateB - dateA;
   });
 });
 
