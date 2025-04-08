@@ -40,10 +40,10 @@
       "id": "user_1744088486759",
       "name": "박성빈",
       "email": "asdf@naver.com",
-      "birth": "2025-04-07",
+      "birth": "2002-02-22",
       "phone": "010-1234-5678",
       "password": "1234",
-      "profileImage": "profile4.png"
+      "profileImage": "profile3.png"
     },
     {
       "id": "user_1744088726036",
@@ -365,7 +365,20 @@
       "memo": "밥"
     },
     {
-      "id": "txn1744092163861",
+      "id": "txn1744091304970",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "08"
+      },
+      "type": "income",
+      "price": 100000,
+      "category": "보너스",
+      "memo": "보너스"
+    },
+    {
+      "id": "txn1744092383447",
       "userId": "user1",
       "date": {
         "year": "2025",
@@ -373,51 +386,25 @@
         "day": "08"
       },
       "type": "expense",
-      "price": 1000,
-      "category": "식비",
-      "memo": "밥2"
+      "price": 4800,
+      "category": "카페&디저트",
+      "memo": "딸기라떼"
     },
     {
-      "id": "txn1744093427448",
+      "id": "txn1744095121043",
       "userId": "user1",
       "date": {
         "year": "2025",
-        "month": "04",
-        "day": "03"
+        "month": "03",
+        "day": "10"
       },
-      "type": "expense",
-      "price": 5000,
-      "category": "식비",
-      "memo": "밥밥밥"
+      "type": "income",
+      "price": 5000000,
+      "category": "월급",
+      "memo": "월급!"
     },
     {
-      "id": "txn1744093933838",
-      "userId": "user1",
-      "date": {
-        "year": "2025",
-        "month": "04",
-        "day": "03"
-      },
-      "type": "expense",
-      "price": 50000,
-      "category": "식비",
-      "memo": "밥이다 밥"
-    },
-    {
-      "id": "txn1744093991868",
-      "userId": "user1",
-      "date": {
-        "year": "2025",
-        "month": "04",
-        "day": "08"
-      },
-      "type": "expense",
-      "price": 5000,
-      "category": "교통",
-      "memo": "교통"
-    },
-    {
-      "id": "txn1744093991868",
+      "id": "txn1744095161327",
       "userId": "user1",
       "date": {
         "year": "2025",
@@ -425,9 +412,9 @@
         "day": "08"
       },
       "type": "expense",
-      "price": 5000,
-      "category": "교통",
-      "memo": "교통"
+      "price": 6000,
+      "category": "식비",
+      "memo": "김밥"
     }
   ]
 }

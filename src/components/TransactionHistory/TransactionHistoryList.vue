@@ -11,10 +11,12 @@
         </tr>
       </thead>
       <tbody>
+        <!--행 클릭 이벤트 추가-->
         <TransactionHistoryItems
           v-for="item in paginatedData"
           :key="item.id"
           :item="item"
+          @click="handleRowClick(item)"
         ></TransactionHistoryItems>
       </tbody>
     </table>
@@ -46,6 +48,13 @@
         </li>
       </ul>
     </nav>
+    <!-- 상세 보기 모달 추가 위치 -->
+    <TransactionDetailModal
+      :show="showDetailModal"
+      :transaction="selectedTransaction"
+      @close="showDetailModal = false"
+      @edit="handleEdit"
+    />
   </div>
 </template>
 
@@ -54,6 +63,9 @@ import TransactionHistoryItems from './TransactionHistoryItems.vue';
 import { computed, ref, watch, onMounted } from 'vue';
 import { defineProps } from 'vue';
 import axios from 'axios';
+
+//상세보기:TransactionDetailModal
+import TransactionDetailModal from '@/components/TransactionDetailModal.vue'; // 상세모달 추가
 
 const tableData = ref([]);
 
@@ -137,6 +149,22 @@ const requestAPI = async () => {
   const response = await axios.get(url);
   console.log('response.data: ', response.data);
   tableData.value = response.data;
+};
+
+//상세보기 페이지
+const handleRowClick = (item) => {
+  selectedTransaction.value = item;
+  showDetailModal.value = true;
+};
+
+// 상세보기 모달 상태
+const showDetailModal = ref(false);
+const selectedTransaction = ref(null);
+
+// 수정 버튼 클릭 시
+const handleEdit = (transaction) => {
+  console.log('수정할 데이터:', transaction);
+  // 여기에 수정 모드로 전환하는 로직 작성 가능
 };
 </script>
 
