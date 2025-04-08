@@ -228,7 +228,7 @@
         "day": "09"
       },
       "type": "expense",
-      "price": 10000000,
+      "price": 10000,
       "category": "식비",
       "memo": "밥밥"
     }

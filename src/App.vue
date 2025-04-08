@@ -18,7 +18,6 @@ import { useTransactionStore } from './stores/transactions';
 import SideBar from './components/SideBar.vue';
 import TransactionForm from './pages/TransactionForm.vue';
 
-
 const transactionStore = useTransactionStore();
 
 const getTransactionList = transactionStore.fetchTransactionListByUserId;

@@ -47,18 +47,17 @@ export const useTransactionStore = defineStore('transactions', () => {
 
     return filtered;
   });
-  
+
   const curMonthTransactionList2 = computed(() => {
     const filtered = states.transactionList.filter(
       (transaction) => parseInt(transaction.date.month) === states.currentMonth
     );
-    
+
     return filtered;
   });
 
   return {
     ...states,
-    curMonthTransactionList,
     curMonthTransactionList2,
     curMonthExpenseList,
     fetchTransactionListByUserId,
