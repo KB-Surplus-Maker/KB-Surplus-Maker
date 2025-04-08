@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
   <tr>
     <td>{{ `${item.date.year}.${item.date.month}.${item.date.day} ` }}</td>
@@ -19,3 +20,8 @@ const props = defineProps({
   item: Object,
 });
 </script>
+=======
+<template></template>
+
+<script setup></script>
+>>>>>>> caafb8d (add components)

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <template>
   <div class="container">
     <table class="table table-hover">
@@ -137,3 +138,8 @@ const requestAPI = async () => {
 </script>
 
 <style></style>
+=======
+<template></template>
+
+<script setup></script>
+>>>>>>> caafb8d (add components)

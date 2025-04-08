@@ -10,7 +10,11 @@ const router = createRouter({
     {
       path: '/history',
       name: 'history',
+<<<<<<< HEAD
       component: () => import('../pages/History.vue'),
+=======
+      component: () => import('../views/History.vue'),
+>>>>>>> caafb8d (add components)
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
