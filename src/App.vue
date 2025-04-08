@@ -14,20 +14,17 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import TransactionMapper from '@/mapper/TransactionMapper.js';
-import UserMapper from '@/mapper/UserMapper.js';
+import { useTransactionStore } from './stores/transactions';
 import SideBar from './components/SideBar.vue';
 import TransactionForm from './pages/TransactionForm.vue';
 
-const showForm = ref(false);
 
-const handleRefresh = () => {
-  alert('거래 내역이 새로고침되었습니다!');
-  showForm.value = false;
-};
-// console.log(UserMapper.getUserById('user1'));
-// console.log(TransactionMapper.getTransactionByUserId('user1'));
+const transactionStore = useTransactionStore();
+
+const getTransactionList = transactionStore.fetchTransactionListByUserId;
+
+getTransactionList('user1');
+console.log('끝');
 </script>
 
 <style>
