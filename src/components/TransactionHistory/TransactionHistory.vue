@@ -1,5 +1,4 @@
 <template>
-<<<<<<< HEAD
   <div class="container">
     <div>
       <div class="d-flex justify-content-center align-items-center my-3 gap-3">
@@ -103,12 +102,3 @@ const changeMonth = (offset) => {
   text-align: center; /* 글자가 길어져도 자연스럽게 */
 }
 </style>
-=======
-  <h2>내역 전체보기</h2>
-  <TransactionHistoryList></TransactionHistoryList>
-</template>
-
-<script setup>
-import TransactionHistoryList from './TransactionHistoryList.vue';
-</script>
->>>>>>> caafb8d (add components)
