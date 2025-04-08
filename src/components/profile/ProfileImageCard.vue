@@ -4,7 +4,7 @@
       :src="`/assets/profile-images/${userStore.currentUser?.profileImage}`"
       class="rounded-circle mx-auto mb-3"
       style="width: 246px; height: 246px; object-fit: cover"
-      alt="프로필 이미지"
+      alt=""
     />
     <button class="btn btn-outline-primary" @click="showModal = true">
       프로필 사진 수정하기
