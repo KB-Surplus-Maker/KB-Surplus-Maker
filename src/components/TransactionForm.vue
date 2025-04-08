@@ -73,7 +73,6 @@
 import { defineProps, defineEmits, reactive } from 'vue';
 import axios from 'axios';
 
-//modal 레이아웃
 import '@/assets/modal.css';
 
 //수입, 지출 카테고리
@@ -135,6 +134,8 @@ const saveTransaction = async () => {
 </script>
 
 <style>
+/*TransitionForm & TransitionDetailModal: 모달 페이지 공통 속성성*/
+
 .modal-header {
   display: flex;
   justify-content: space-between;
