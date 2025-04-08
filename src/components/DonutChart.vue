@@ -1,15 +1,12 @@
 <template>
-  <div>
-    <h2>월별 카테고리별 지출 도넛 차트</h2>
+  <div class="chart-wrapper">
+    <h3>월별 카테고리별 지출 도넛 차트</h3>
     <canvas ref="doughnutCanvas"></canvas>
   </div>
-  <button @click="changeMonth(3)">버튼</button>
-  <!-- <div>{{ filteredData }}</div> -->
 </template>
 
 <script setup>
-// import TransactionMapper from '@/mapper/TransactionMapper.js';
-import { onMounted, ref, computed } from 'vue';
+import { onMounted, ref, computed, watch } from 'vue';
 import {
   Chart,
   DoughnutController,
@@ -17,18 +14,18 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import { storeToRefs } from 'pinia';
 import { useTransactionStore } from '@/stores/transactions';
 
-// Chart.js 등록
 Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
 
 const doughnutCanvas = ref(null);
+const chartInstance = ref(null); // 차트 인스턴스 저장
+
 const transactionStore = useTransactionStore();
-const changeMonth = transactionStore.changeCurMonth;
 
 const filteredData = computed(() => transactionStore.curMonthExpenseList);
 
+// 카테고리별로 가격 합계
 const categoryData = computed(() => {
   const data = {};
   filteredData.value.forEach((t) => {
@@ -37,10 +34,15 @@ const categoryData = computed(() => {
   return data;
 });
 
-onMounted(() => {
-  console.log('진입');
+// 차트 그리는 함수
+function drawChart() {
+  const ctx = doughnutCanvas.value;
 
-  new Chart(doughnutCanvas.value, {
+  if (chartInstance.value) {
+    chartInstance.value.destroy();
+  }
+
+  chartInstance.value = new Chart(ctx, {
     type: 'doughnut',
     data: {
       labels: Object.keys(categoryData.value),
@@ -69,12 +71,27 @@ onMounted(() => {
       },
     },
   });
+}
+
+// mounted에서 최초 한 번 시도
+onMounted(() => {
+  if (filteredData.value.length > 0) {
+    drawChart();
+  }
+});
+
+// filteredData가 변할 때마다 다시 그리기
+watch(categoryData, (newVal) => {
+  if (Object.keys(newVal).length > 0) {
+    drawChart();
+  }
 });
 </script>
 
 <style scoped>
-canvas {
-  max-width: 400px;
+.chart-wrapper {
+  width: 400px;
+  height: 400px;
   margin: 0 auto;
 }
 </style>

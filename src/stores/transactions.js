@@ -4,10 +4,11 @@ import TransactionMapper from '@/mapper/TransactionMapper.js';
 
 export const useTransactionStore = defineStore('transactions', () => {
   let today = new Date();
-  console.log(typeof today.getMonth());
+  // console.log(typeof today.getMonth());
   const states = reactive({
     transactionList: [],
     currentMonth: today.getMonth() + 1,
+    currentYear: today.getFullYear(),
   });
 
   const fetchTransactionListByUserId = async (userId) => {
@@ -32,33 +33,19 @@ export const useTransactionStore = defineStore('transactions', () => {
         parseInt(transaction.date.year) === states.currentYear
     );
 
-    // const sorted = filtered.sort((trans1, trans2) => {
-    //   if (trans1.date.year < trans2.date.year) return -1;
-    //   else if (trans1.date.year > trans2.date.year) return 1;
-    //   else {
-    //     if (trans1.date.month < trans2.date.month) return -1;
-    //     else if (trans1.date.month > trans2.date.month) return 1;
-    //     else {
-    //       if (trans1.date.day <= trans2.date.month) return -1;
-    //       else return 1;
-    //     }
-    //   }
-    // });
-
     return filtered;
   });
-  
+
   const curMonthTransactionList2 = computed(() => {
     const filtered = states.transactionList.filter(
       (transaction) => parseInt(transaction.date.month) === states.currentMonth
     );
-    
+
     return filtered;
   });
 
   return {
     ...states,
-    curMonthTransactionList,
     curMonthTransactionList2,
     curMonthExpenseList,
     fetchTransactionListByUserId,
