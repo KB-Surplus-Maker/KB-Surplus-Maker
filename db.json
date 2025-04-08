@@ -207,58 +207,30 @@
       "memo": "편의점"
     },
     {
-      "id": "txn015",
-      "userId": "user3",
-      "date": { "year": "2025", "month": "3", "day": "6" },
-      "type": "income",
-      "price": 50000,
-      "category": "etc",
-      "memo": "중고물품 판매"
-    },
-    {
-      "id": "txn016",
+      "id": "txn1744074784975",
       "userId": "user1",
-      "date": { "year": "2025", "month": "3", "day": "7" },
-      "type": "expense",
-      "price": 16000,
-      "category": "entertainment",
-      "memo": "콘서트 티켓"
-    },
-    {
-      "id": "txn017",
-      "userId": "user2",
-      "date": { "year": "2025", "month": "3", "day": "7" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "08"
+      },
       "type": "income",
-      "price": 120000,
-      "category": "salary",
-      "memo": "보너스"
+      "price": 100000,
+      "category": "식비",
+      "memo": "파파 용돈"
     },
     {
-      "id": "txn018",
-      "userId": "user3",
-      "date": { "year": "2025", "month": "3", "day": "7" },
-      "type": "expense",
-      "price": 24000,
-      "category": "shopping",
-      "memo": "운동화 구매"
-    },
-    {
-      "id": "txn019",
+      "id": "txn1744074852714",
       "userId": "user1",
-      "date": { "year": "2025", "month": "3", "day": "7" },
-      "type": "income",
-      "price": 90000,
-      "category": "etc",
-      "memo": "현금 선물"
-    },
-    {
-      "id": "txn020",
-      "userId": "user2",
-      "date": { "year": "2025", "month": "3", "day": "7" },
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "09"
+      },
       "type": "expense",
-      "price": 6000,
-      "category": "food",
-      "memo": "편의점"
+      "price": 10000000,
+      "category": "식비",
+      "memo": "밥밥"
     }
   ]
 }
