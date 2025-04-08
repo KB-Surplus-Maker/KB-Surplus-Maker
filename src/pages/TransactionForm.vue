@@ -15,10 +15,12 @@
 
             <label>유형</label>
             <div>
-              <label
+              <!--라디오 버튼 간격-->
+              <label style="margin-right: 1.5rem"
                 ><input type="radio" value="수입" v-model="form.type" />
                 수입</label
               >
+
               <label
                 ><input type="radio" value="지출" v-model="form.type" />
                 지출</label
@@ -28,14 +30,24 @@
             <label>카테고리</label>
             <select v-model="form.category">
               <option value="">--선택--</option>
-              <option>식비</option>
-              <option>교통</option>
-              <option>카페&디저트</option>
-              <option>뷰티</option>
-              <option>쇼핑</option>
-              <option>기타</option>
+              <option
+                v-for="item in form.type === '수입'
+                  ? incomeCategories
+                  : expenseCategories"
+                :key="item"
+                :value="item"
+              >
+                {{ item }}
+              </option>
             </select>
 
+            <label>금액 </label>
+            <input
+              type="number"
+              v-model="form.price"
+              placeholder="금액을 입력하세요"
+              min="0"
+            />
             <label>메모</label>
             <input
               type="text"
@@ -44,8 +56,11 @@
             />
 
             <div class="modal-actions">
-              <button type="submit">저장</button>
-              <button type="button" @click="close">취소</button>
+              <button type="button" @click="close" class="cancel-button">
+                취소
+              </button>
+
+              <button type="submit" class="save-button">저장</button>
             </div>
           </form>
         </div>
@@ -56,59 +71,177 @@
 
 <script setup>
 import { defineProps, defineEmits, reactive } from 'vue';
+import axios from 'axios';
 
+//수입, 지출 카테고리
+const incomeCategories = ['월급', '보너스', '용돈', '투자수익', '기타'];
+const expenseCategories = [
+  '식비',
+  '교통',
+  '카페&디저트',
+  '뷰티',
+  '쇼핑',
+  '생활',
+  '기타',
+];
+
+//props & emit
 const props = defineProps({
   show: Boolean,
 });
 const emit = defineEmits(['close']);
-
 const close = () => emit('close');
 
+//form 상태
 const form = reactive({
   date: new Date().toISOString().slice(0, 10),
   type: '수입',
   category: '',
-  subCategory: '',
+  price: '',
   memo: '',
 });
 
-const saveTransaction = () => {
-  console.log(form); // 나중에 저장 로직 연결
-  close();
+//날짜 포맷 변환 함수  (yyyy-mm-dd -> {year, month,day})
+
+function parseDate(dateStr) {
+  const [year, month, day] = dateStr.split('-');
+  return { year, month, day };
+}
+
+//데이터 저장 함수
+const saveTransaction = async () => {
+  const transaction = {
+    id: `txn${Date.now()}`,
+    userId: 'user1', // Todo: 로그인된 사용자 ID로 동적 변경 기능 추가
+    date: parseDate(form.date),
+    type: form.type === '수입' ? 'income' : 'expense',
+    price: parseInt(form.price),
+    category: form.category,
+    memo: form.memo,
+  };
+
+  try {
+    await axios.post('http://localhost:3000/transactions', transaction);
+    alert('저장 완료!');
+    close();
+  } catch (error) {
+    console.error('저장 실패:', error);
+    alert('오류 발생');
+  }
 };
 </script>
 
-<style scoped>
+<style>
 .modal-backdrop {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 32, 64, 0.5); /* 진한 블루 반투명 */
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
 }
 
 .modal-container {
-  background: white;
+  background: #ffffff;
   padding: 2rem;
-  border-radius: 10px;
-  width: 400px;
+  border-radius: 1rem;
+  width: 420px;
   max-width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-header h3 {
+  font-size: 1.3rem;
+  color: #003366;
+}
+
+.modal-header button {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  color: #999;
+}
+
+.modal-body form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  font-weight: 600;
+  color: #003366;
+  margin-bottom: 0.25rem;
+}
+
+input[type='date'],
+input[type='text'],
+input[type='number'],
+select {
+  padding: 0.5rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.95rem;
+  transition: border-color 0.2s;
+}
+
+input:focus,
+select:focus {
+  border-color: #3366cc;
+  outline: none;
+}
+
+.modal-body div input[type='radio'] {
+  margin-right: 5px;
 }
 
 .modal-actions {
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: flex;
   justify-content: flex-end;
-  gap: 1rem;
+  gap: 0.75rem;
+}
+
+.cancel-button {
+  background: white;
+  color: #003366;
+  border: 1px solid #003366;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.cancel-button:hover {
+  background: #f0f6ff;
+}
+
+.save-button {
+  background: #003366;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.save-button:hover {
+  background: #002855;
 }
 </style>

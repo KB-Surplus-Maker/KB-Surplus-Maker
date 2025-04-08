@@ -11,20 +11,6 @@
       <router-view />
     </div>
   </div>
-
-  <!-- <div class="app-container">
-    <div class="text-center">
-      <button class="btn btn-primary" @click="showForm = true">
-        거래 추가
-      </button>
-    </div>
-
-    <TransactionForm
-      v-if="showForm"
-      @close="showForm = false"
-      @refresh="handleRefresh"
-    />
-  </div> -->
 </template>
 
 <script setup>
