@@ -165,7 +165,7 @@
       "id": "txn016",
       "userId": "user1",
       "date": { "year": "2025", "month": "4", "day": "7" },
-      "type": "expense",
+      "type": "income",
       "price": 16000,
       "category": "entertainment",
       "memo": "콘서트 티켓"
