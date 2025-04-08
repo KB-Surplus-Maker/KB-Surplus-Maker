@@ -22,7 +22,7 @@
 import { useTransactionStore } from './stores/transactions';
 import { ref } from 'vue';
 import SideBar from './components/SideBar.vue';
-import TransactionForm from './pages/TransactionForm.vue';
+import TransactionForm from './components/TransactionForm.vue';
 import AddButton from './components/AddButton.vue';
 
 const transactionStore = useTransactionStore();

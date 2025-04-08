@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue';
-import TransactionForm from './TransactionForm.vue';
+import TransactionForm from '../components/TransactionForm.vue';
 import AddButton from '../components/AddButton.vue';
 
 const showModal = ref(false);
