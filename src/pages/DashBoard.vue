@@ -62,7 +62,7 @@ const chartData = computed(() => {
     labels: labels,
     datasets: [
       {
-        label: '일별 지출 금액',
+        label: '일별 지출내역',
         data: data,
         fill: false,
         borderColor: 'rgb(75, 192, 192)',
@@ -71,8 +71,6 @@ const chartData = computed(() => {
     ],
   };
 });
-
-console.log(chartData.value);
 
 const chartOptions = {
   responsive: true,
@@ -83,7 +81,7 @@ const chartOptions = {
     },
     title: {
       display: true,
-      text: '일별 지출 금액',
+      text: '일별 지출 내역',
     },
   },
 };

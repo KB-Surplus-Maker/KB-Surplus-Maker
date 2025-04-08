@@ -38,7 +38,9 @@ export const useTransactionStore = defineStore('transactions', () => {
 
   const curMonthTransactionList2 = computed(() => {
     const filtered = states.transactionList.filter(
-      (transaction) => parseInt(transaction.date.month) === states.currentMonth
+      (transaction) =>
+        parseInt(transaction.date.month) === states.currentMonth &&
+        parseInt(transaction.date.year) === states.currentYear
     );
 
     return filtered;
@@ -62,13 +64,9 @@ export const useTransactionStore = defineStore('transactions', () => {
     }
   };
 
-  const curYear = computed(() => {
-    return states.currentYear;
-  });
+  const curYear = computed(() => states.currentYear);
 
-  const curMonth = computed(() => {
-    return states.currentMonth;
-  });
+  const curMonth = computed(() => states.currentMonth);
 
   return {
     ...states,
