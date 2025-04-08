@@ -42,18 +42,22 @@
       :selectedCategory="selectedCategory"
       :yearMonth="formattedYearMonth"
       @update:tableData="(data) => (tableData.value = data)"
-      @update:categories="(data) => (categories.value = data)"
+      @update:categories="(data) => (categories = data)"
     ></TransactionHistoryList>
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import TransactionHistoryList from './TransactionHistoryList.vue';
 
 const tableData = ref([]);
 const categories = ref([]);
 const selectedCategory = ref('all');
+
+watch(categories, (newVal) => {
+  console.log('categories updated:', newVal);
+});
 
 const selectCategory = (category) => {
   selectedCategory.value = category;

@@ -91,17 +91,9 @@ const filteredData = computed(() => {
 
   // 날짜 정렬: 최신순 (내림차순)
   const sorted = categoryFiltered.slice().sort((a, b) => {
-    const dateA = new Date(
-      `${a.date.year}-${String(a.date.month).padStart(2, '0')}-${String(
-        a.date.day
-      ).padStart(2, '0')}`
-    );
-    const dateB = new Date(
-      `${b.date.year}-${String(b.date.month).padStart(2, '0')}-${String(
-        b.date.day
-      ).padStart(2, '0')}`
-    );
-    return dateB - dateA;
+    const dateA = new Date(a.date.year, a.date.month - 1, a.date.day);
+    const dateB = new Date(b.date.year, b.date.month - 1, b.date.day);
+    return dateB - dateA; // 최신순 정렬 (내림차순)
   });
 
   return sorted;
@@ -136,6 +128,7 @@ onMounted(async () => {
   // 데이터와 카테고리 리스트를 부모에 전달
   emit('update:tableData', tableData.value);
   const categories = [...new Set(tableData.value.map((item) => item.category))];
+  console.log('categories:', categories);
   emit('update:categories', categories);
 });
 
