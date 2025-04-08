@@ -14,12 +14,20 @@
 </template>
 
 <script setup>
-import TransactionMapper from '@/mapper/TransactionMapper.js';
-import UserMapper from '@/mapper/UserMapper.js';
+import { useTransactionStore } from './stores/transactions';
 import SideBar from './components/SideBar.vue';
+// import TransactionForm from './pages/TransactionForm.vue';
 
-// console.log(UserMapper.getUserById('user1'));
-// console.log(TransactionMapper.getTransactionByUserId('user1'));
+const transactionStore = useTransactionStore();
+
+const getTransactionListByUserId =
+  transactionStore.fetchTransactionListByUserId;
+
+getTransactionListByUserId('user1');
 </script>
 
-<style></style>
+<style>
+body {
+  background-color: #f4f8fb;
+}
+</style>
