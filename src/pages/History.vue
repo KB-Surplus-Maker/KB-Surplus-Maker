@@ -5,4 +5,6 @@
     </div>
   </div>
 </template>
-<script setup></script>
+<script setup>
+import TransactionHistory from '@/components/TransactionHistory/TransactionHistory.vue';
+</script>

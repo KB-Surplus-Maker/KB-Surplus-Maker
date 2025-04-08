@@ -1,4 +1,9 @@
 <template>
+  <div class="d-flex justify-content-center align-items-center my-3 gap-3">
+    <button class="btn btn-outline-secondary" @click="prevMonth">◀</button>
+    <div class="fs-5">{{ formattedYearMonth }}</div>
+    <button class="btn btn-outline-secondary" @click="nextMonth">▶</button>
+  </div>
   <div class="container">
     <div class="d-flex justify-content-between align-items-center my-3">
       <div class="fs-3">상세 내역</div>
@@ -20,7 +25,7 @@
           >
             전체보기
           </li>
-          <li v-for="category in uniqueCategories" :key="category">
+          <li v-for="category in categories" :key="category">
             <a
               class="dropdown-item"
               href="#"
@@ -35,47 +40,21 @@
     <hr />
     <TransactionHistoryList
       :selectedCategory="selectedCategory"
+      :yearMonth="formattedYearMonth"
+      @update:tableData="(data) => (tableData.value = data)"
+      @update:categories="(data) => (categories.value = data)"
     ></TransactionHistoryList>
   </div>
 </template>
 
 <script setup>
 import { computed, ref } from 'vue';
-const lst = [
-  {
-    id: 'txn001',
-    userId: 'user1',
-    date: { year: '2025', month: '04', day: '01' },
-    type: 'expense',
-    price: 12000,
-    category: 'food',
-    memo: '점심 식사',
-  },
-  {
-    id: 'txn002',
-    userId: 'user2',
-    date: { year: '2025', month: '04', day: '01' },
-    type: 'income',
-    price: 300000,
-    category: 'salary',
-    memo: '프리랜서 급여',
-  },
-  {
-    id: 'txn003',
-    userId: 'user3',
-    date: { year: '2025', month: '04', day: '02' },
-    type: 'expense',
-    price: 4500,
-    category: 'transport',
-    memo: '지하철 요금',
-  },
-];
 import TransactionHistoryList from './TransactionHistoryList.vue';
-const uniqueCategories = computed(() => {
-  const categories = lst.map((item) => item.category);
-  return [...new Set(categories)];
-});
+
+const tableData = ref([]);
+const categories = ref([]);
 const selectedCategory = ref('all');
+
 const selectCategory = (category) => {
   selectedCategory.value = category;
 };
@@ -83,6 +62,30 @@ const selectCategory = (category) => {
 const dropdownText = computed(() =>
   selectedCategory.value === 'all' ? '카테고리별 보기' : selectedCategory.value
 );
+
+// 년/월 상태
+const currentDate = ref(new Date());
+
+// 포맷된 년.월 문자열 (예: 2025.04)
+const formattedYearMonth = computed(() => {
+  const year = currentDate.value.getFullYear();
+  const month = String(currentDate.value.getMonth() + 1).padStart(2, '0');
+  return `${year}.${month}`;
+});
+
+// 이전 달
+const prevMonth = () => {
+  const newDate = new Date(currentDate.value);
+  newDate.setMonth(currentDate.value.getMonth() - 1);
+  currentDate.value = newDate;
+};
+
+// 다음 달
+const nextMonth = () => {
+  const newDate = new Date(currentDate.value);
+  newDate.setMonth(currentDate.value.getMonth() + 1);
+  currentDate.value = newDate;
+};
 </script>
 <style scoped>
 .fixed-width {

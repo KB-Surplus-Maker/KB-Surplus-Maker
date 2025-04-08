@@ -89,11 +89,22 @@ const filteredData = computed(() => {
           (item) => item.category === props.selectedCategory
         );
 
-  return categoryFiltered.slice().sort((a, b) => {
-    const dateA = new Date(`${a.date.year}-${a.date.month}-${a.date.day}`);
-    const dateB = new Date(`${b.date.year}-${b.date.month}-${b.date.day}`);
+  // 날짜 정렬: 최신순 (내림차순)
+  const sorted = categoryFiltered.slice().sort((a, b) => {
+    const dateA = new Date(
+      `${a.date.year}-${String(a.date.month).padStart(2, '0')}-${String(
+        a.date.day
+      ).padStart(2, '0')}`
+    );
+    const dateB = new Date(
+      `${b.date.year}-${String(b.date.month).padStart(2, '0')}-${String(
+        b.date.day
+      ).padStart(2, '0')}`
+    );
     return dateB - dateA;
   });
+
+  return sorted;
 });
 
 const totalPages = computed(() =>
