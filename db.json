@@ -205,6 +205,32 @@
       "price": 6000,
       "category": "food",
       "memo": "편의점"
+    },
+    {
+      "id": "txn1744074784975",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "08"
+      },
+      "type": "income",
+      "price": 100000,
+      "category": "식비",
+      "memo": "파파 용돈"
+    },
+    {
+      "id": "txn1744074852714",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "09"
+      },
+      "type": "expense",
+      "price": 10000000,
+      "category": "식비",
+      "memo": "밥밥"
     }
   ]
 }

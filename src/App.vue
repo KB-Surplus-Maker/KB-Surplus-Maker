@@ -16,6 +16,8 @@
 <script setup>
 import { useTransactionStore } from './stores/transactions';
 import SideBar from './components/SideBar.vue';
+import TransactionForm from './pages/TransactionForm.vue';
+
 
 const transactionStore = useTransactionStore();
 
@@ -25,4 +27,8 @@ getTransactionList('user1');
 console.log('끝');
 </script>
 
-<style></style>
+<style>
+body {
+  background-color: #f4f8fb;
+}
+</style>
