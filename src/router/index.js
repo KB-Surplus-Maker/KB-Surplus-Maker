@@ -11,6 +11,11 @@ const router = createRouter({
   routes: [
     {
       path: "/",
+      name: "Login",
+      component: LoginView,
+    },
+    {
+      path: "/home",
       name: "home",
       component: Home,
     },
@@ -29,11 +34,6 @@ const router = createRouter({
       name: "Profile",
       component: ProfileView,
       meta: { requiresAuth: true },
-    },
-    {
-      path: "/login",
-      name: "Login",
-      component: LoginView,
     },
     {
       path: "/signup",

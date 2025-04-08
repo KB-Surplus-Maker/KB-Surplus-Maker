@@ -41,7 +41,7 @@ const handleLogin = async () => {
   try {
     await userStore.login(email.value, password.value);
     alert("로그인 성공!");
-    router.push("/"); // 로그인 후 메인 페이지 등으로 이동
+    router.push("/home"); // 로그인 후 메인 페이지 등으로 이동
   } catch (err) {
     alert(err.message);
   }
