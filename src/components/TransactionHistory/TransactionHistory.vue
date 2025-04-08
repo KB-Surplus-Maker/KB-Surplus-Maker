@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <div>
+      <!-- 여기  -->
+    </div>
     <div class="d-flex justify-content-between align-items-center my-3">
       <div class="fs-3">상세 내역</div>
       <div class="dropdown">
@@ -35,46 +38,16 @@
     <hr />
     <TransactionHistoryList
       :selectedCategory="selectedCategory"
+      @update:tableData="updateTableData"
+      @update:categories="updateCategories"
     ></TransactionHistoryList>
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from 'vue';
-const lst = [
-  {
-    id: 'txn001',
-    userId: 'user1',
-    date: { year: '2025', month: '04', day: '01' },
-    type: 'expense',
-    price: 12000,
-    category: 'food',
-    memo: '점심 식사',
-  },
-  {
-    id: 'txn002',
-    userId: 'user2',
-    date: { year: '2025', month: '04', day: '01' },
-    type: 'income',
-    price: 300000,
-    category: 'salary',
-    memo: '프리랜서 급여',
-  },
-  {
-    id: 'txn003',
-    userId: 'user3',
-    date: { year: '2025', month: '04', day: '02' },
-    type: 'expense',
-    price: 4500,
-    category: 'transport',
-    memo: '지하철 요금',
-  },
-];
+import { ref, computed } from 'vue';
 import TransactionHistoryList from './TransactionHistoryList.vue';
-const uniqueCategories = computed(() => {
-  const categories = lst.map((item) => item.category);
-  return [...new Set(categories)];
-});
+
 const selectedCategory = ref('all');
 const selectCategory = (category) => {
   selectedCategory.value = category;
@@ -83,6 +56,19 @@ const selectCategory = (category) => {
 const dropdownText = computed(() =>
   selectedCategory.value === 'all' ? '카테고리별 보기' : selectedCategory.value
 );
+
+// 자식에게서 받는 데이터들
+const tableData = ref([]);
+const uniqueCategories = ref([]);
+
+// 자식이 emit할 때 받을 함수들
+const updateTableData = (data) => {
+  tableData.value = data;
+};
+
+const updateCategories = (categories) => {
+  uniqueCategories.value = categories;
+};
 </script>
 <style scoped>
 .fixed-width {

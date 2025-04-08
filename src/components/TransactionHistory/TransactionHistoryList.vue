@@ -12,19 +12,52 @@
       </thead>
       <tbody>
         <TransactionHistoryItems
-          v-for="item in filteredData"
+          v-for="item in paginatedData"
           :key="item.id"
           :item="item"
         ></TransactionHistoryItems>
       </tbody>
     </table>
+    <!-- 페이지네이션 -->
+    <nav v-if="totalPages > 1" class="mt-3 d-flex justify-content-center">
+      <ul class="pagination">
+        <li
+          class="page-item"
+          :class="{ disabled: currentPage === 1 }"
+          @click="goToPage(currentPage - 1)"
+        >
+          <a class="page-link" href="#"><</a>
+        </li>
+        <li
+          v-for="page in totalPages"
+          :key="page"
+          class="page-item"
+          :class="{ active: page === currentPage }"
+          @click="goToPage(page)"
+        >
+          <a class="page-link" href="#">{{ page }}</a>
+        </li>
+        <li
+          class="page-item"
+          :class="{ disabled: currentPage === totalPages }"
+          @click="goToPage(currentPage + 1)"
+        >
+          <a class="page-link" href="#">></a>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
 <script setup>
 import TransactionHistoryItems from './TransactionHistoryItems.vue';
-import { computed } from 'vue';
+import { computed, ref, watch, onMounted } from 'vue';
 import { defineProps } from 'vue';
+import axios from 'axios';
+
+const tableData = ref([]);
+
+const emit = defineEmits(['update:tableData', 'update:categories']);
 
 const props = defineProps({
   selectedCategory: {
@@ -32,192 +65,64 @@ const props = defineProps({
     default: 'all',
   },
 });
+
+const currentPage = ref(1);
+const itemsPerPage = 15;
+
 const filteredData = computed(() => {
-  if (props.selectedCategory === 'all') return tableData;
-  return tableData.filter((item) => item.category === props.selectedCategory);
+  const filtered =
+    props.selectedCategory === 'all'
+      ? tableData.value
+      : tableData.value.filter(
+          (item) => item.category === props.selectedCategory
+        );
+
+  // 날짜 기준 내림차순 정렬 (최신순)
+  return filtered.slice().sort((a, b) => {
+    const dateA = new Date(`${a.date.year}-${a.date.month}-${a.date.day}`);
+    const dateB = new Date(`${b.date.year}-${b.date.month}-${b.date.day}`);
+    return dateB - dateA; // 최신 날짜가 먼저 오게
+  });
 });
-const tableData = [
-  {
-    id: 'txn001',
-    userId: 'user1',
-    date: { year: '2025', month: '04', day: '01' },
-    type: 'expense',
-    price: 12000,
-    category: 'food',
-    memo: '점심 식사',
-  },
-  {
-    id: 'txn002',
-    userId: 'user2',
-    date: { year: '2025', month: '04', day: '01' },
-    type: 'income',
-    price: 300000,
-    category: 'salary',
-    memo: '프리랜서 급여',
-  },
-  {
-    id: 'txn003',
-    userId: 'user3',
-    date: { year: '2025', month: '04', day: '02' },
-    type: 'expense',
-    price: 4500,
-    category: 'transport',
-    memo: '지하철 요금',
-  },
-  {
-    id: 'txn004',
-    userId: 'user1',
-    date: { year: '2025', month: '04', day: '02' },
-    type: 'expense',
-    price: 25000,
-    category: 'shopping',
-    memo: '문구류 구매',
-  },
-  {
-    id: 'txn005',
-    userId: 'user2',
-    date: { year: '2025', month: '04', day: '03' },
-    type: 'expense',
-    price: 8900,
-    category: 'food',
-    memo: '간식',
-  },
-  {
-    id: 'txn006',
-    userId: 'user3',
-    date: { year: '2025', month: '04', day: '03' },
-    type: 'income',
-    price: 100000,
-    category: 'investment',
-    memo: '주식 수익',
-  },
-  {
-    id: 'txn007',
-    userId: 'user1',
-    date: { year: '2025', month: '04', day: '03' },
-    type: 'expense',
-    price: 3000,
-    category: 'transport',
-    memo: '버스 요금',
-  },
-  {
-    id: 'txn008',
-    userId: 'user2',
-    date: { year: '2025', month: '04', day: '04' },
-    type: 'income',
-    price: 150000,
-    category: 'salary',
-    memo: '단기 계약금',
-  },
-  {
-    id: 'txn009',
-    userId: 'user3',
-    date: { year: '2025', month: '04', day: '04' },
-    type: 'expense',
-    price: 7000,
-    category: 'food',
-    memo: '카페',
-  },
-  {
-    id: 'txn010',
-    userId: 'user1',
-    date: { year: '2025', month: '04', day: '05' },
-    type: 'expense',
-    price: 19000,
-    category: 'entertainment',
-    memo: '영화 관람',
-  },
-  {
-    id: 'txn011',
-    userId: 'user2',
-    date: { year: '2025', month: '04', day: '05' },
-    type: 'expense',
-    price: 21000,
-    category: 'shopping',
-    memo: '화장품',
-  },
-  {
-    id: 'txn012',
-    userId: 'user3',
-    date: { year: '2025', month: '04', day: '05' },
-    type: 'income',
-    price: 80000,
-    category: 'investment',
-    memo: '비트코인 수익',
-  },
-  {
-    id: 'txn013',
-    userId: 'user1',
-    date: { year: '2025', month: '04', day: '06' },
-    type: 'expense',
-    price: 14000,
-    category: 'food',
-    memo: '저녁식사',
-  },
-  {
-    id: 'txn014',
-    userId: 'user2',
-    date: { year: '2025', month: '04', day: '06' },
-    type: 'expense',
-    price: 5000,
-    category: 'transport',
-    memo: '택시비',
-  },
-  {
-    id: 'txn015',
-    userId: 'user3',
-    date: { year: '2025', month: '04', day: '06' },
-    type: 'income',
-    price: 50000,
-    category: 'etc',
-    memo: '중고물품 판매',
-  },
-  {
-    id: 'txn016',
-    userId: 'user1',
-    date: { year: '2025', month: '04', day: '07' },
-    type: 'expense',
-    price: 16000,
-    category: 'entertainment',
-    memo: '콘서트 티켓',
-  },
-  {
-    id: 'txn017',
-    userId: 'user2',
-    date: { year: '2025', month: '04', day: '07' },
-    type: 'income',
-    price: 120000,
-    category: 'salary',
-    memo: '보너스',
-  },
-  {
-    id: 'txn018',
-    userId: 'user3',
-    date: { year: '2025', month: '04', day: '07' },
-    type: 'expense',
-    price: 24000,
-    category: 'shopping',
-    memo: '운동화 구매',
-  },
-  {
-    id: 'txn019',
-    userId: 'user1',
-    date: { year: '2025', month: '04', day: '07' },
-    type: 'income',
-    price: 90000,
-    category: 'etc',
-    memo: '현금 선물',
-  },
-  {
-    id: 'txn020',
-    userId: 'user2',
-    date: { year: '2025', month: '04', day: '07' },
-    type: 'expense',
-    price: 6000,
-    category: 'food',
-    memo: '편의점',
-  },
-];
+
+const totalPages = computed(() =>
+  Math.ceil(filteredData.value.length / itemsPerPage)
+);
+
+const paginatedData = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return filteredData.value.slice(start, start + itemsPerPage);
+});
+
+const goToPage = (page) => {
+  if (page >= 1 && page <= totalPages.value) {
+    currentPage.value = page;
+  }
+};
+
+// 카테고리 바뀌면 페이지 초기화
+watch(
+  () => props.selectedCategory,
+  () => {
+    currentPage.value = 1;
+  }
+);
+
+onMounted(async () => {
+  await requestAPI();
+
+  // 데이터와 카테고리 리스트를 부모에 전달
+  emit('update:tableData', tableData.value);
+  const categories = [...new Set(tableData.value.map((item) => item.category))];
+  emit('update:categories', categories);
+});
+
+const requestAPI = async () => {
+  const url = 'http://localhost:3000/transactions';
+  const response = await axios.get(url);
+  console.log('response.data: ', response.data);
+  tableData.value = response.data;
+};
 </script>
 
 <style></style>
