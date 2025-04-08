@@ -1,22 +1,25 @@
 <template>
   <div class="container mt-5">
-    <div class="row mb-4 text-center"></div>
-    <div class="row">
-      <div class="col-md-6 mb-4">
-        <div
-          class="d-flex justify-content-center align-items-center p-3 border rounded shadow-sm"
-          style="height: 350px"
-        >
+    <!-- 상단 차트 영역 -->
+    <div class="row mb-4">
+      <div class="col-12 col-md-6 mb-4">
+        <div class="chart-wrapper">
           <LineChart :chartData="chartData" :options="chartOptions" />
         </div>
       </div>
 
-      <div class="col-md-6 mb-4">
-        <div
-          class="d-flex justify-content-center align-items-center p-3 border rounded shadow-sm"
-          style="height: 350px"
-        >
+      <div class="col-12 col-md-6 mb-4">
+        <div class="chart-wrapper">
           <DonutChart />
+        </div>
+      </div>
+    </div>
+
+    <!-- 트랜잭션 리스트 -->
+    <div class="row">
+      <div class="col-12">
+        <div class="list-wrapper">
+          <TransactionList />
         </div>
       </div>
     </div>
@@ -31,7 +34,7 @@ import { useTransactionStore } from '@/stores/transactions';
 import { computed, reactive } from 'vue';
 
 const transactionsStore = useTransactionStore();
-const curMonthExpenses = transactionsStore.curMonthExpenseList;
+const curMonthExpenses = computed(() => transactionsStore.curMonthExpenseList);
 
 const chartData = computed(() => {
   const dailyExpenses = {};
@@ -40,8 +43,8 @@ const chartData = computed(() => {
     dailyExpenses[i] = 0;
   }
 
-  curMonthExpenses.forEach((trans) => {
-    const day = Number(trans.date.day);
+  curMonthExpenses.value.forEach((trans) => {
+    const day = trans.date.day;
     const label = day;
 
     dailyExpenses[label] += trans.price;
@@ -77,3 +80,31 @@ const chartOptions = {
   },
 };
 </script>
+
+<style scoped>
+.chart-wrapper {
+  width: 100%;
+  height: 100%;
+  min-height: 300px;
+  max-height: 450px;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #dee2e6;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.list-wrapper {
+  width: 100%;
+  min-height: 400px;
+  padding: 1rem;
+  border: 1px solid #dee2e6;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+</style>
