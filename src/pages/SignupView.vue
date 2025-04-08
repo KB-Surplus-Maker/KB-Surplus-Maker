@@ -1,6 +1,6 @@
 <template>
-  <div class="container mt-5">
-    <h2>회원가입</h2>
+  <div class="container mt-5" style="max-width: 400px">
+    <h2 style="text-align: center">회원가입</h2>
     <form @submit.prevent="handleSignup">
       <input v-model="form.name" placeholder="이름" class="form-control my-2" />
       <input
