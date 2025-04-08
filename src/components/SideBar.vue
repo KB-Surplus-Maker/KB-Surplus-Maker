@@ -44,19 +44,31 @@
         <strong>사용자</strong>
       </a>
       <ul class="dropdown-menu text-small shadow">
-        <li><a class="dropdown-item" href="#">설정</a></li>
-        <li><a class="dropdown-item" href="#">프로필</a></li>
+        <li><a class="dropdown-item" @click="goToProfile()">프로필 설정</a></li>
         <li><hr class="dropdown-divider" /></li>
-        <li><a class="dropdown-item" href="#">로그아웃</a></li>
+        <li><a class="dropdown-item" @click="signout()">로그아웃</a></li>
       </ul>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/userStore';
 
 const route = useRoute();
+const router = useRouter();
+
+const goToProfile = () => {
+  router.push('/profile');
+};
+
+const user = useUserStore();
+
+const signout = () => {
+  user.logout();
+  router.push('/');
+};
 </script>
 
 <style scoped>
