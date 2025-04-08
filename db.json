@@ -2,11 +2,12 @@
   "users": [
     {
       "id": "user1",
-      "name": "Alex",
+      "name": "Alexa",
       "email": "alex@example.com",
       "birth": "2001-04-14",
       "password": "1234",
-      "phone": "010-1234-5678"
+      "phone": "010-1234-5678",
+      "profileImage": "profile3.png"
     },
     {
       "id": "user2",
@@ -14,7 +15,8 @@
       "email": "jamie@example.com",
       "birth": "2001-04-14",
       "password": "1234",
-      "phone": "010-1111-1111"
+      "phone": "010-1111-1111",
+      "profileImage": "src"
     },
     {
       "id": "user3",
@@ -22,7 +24,35 @@
       "email": "taylor@example.com",
       "birth": "2001-04-14",
       "password": "1234",
-      "phone": "010-1111-1111"
+      "phone": "010-1111-1111",
+      "profileImage": "src"
+    },
+    {
+      "id": "user_1744075392534",
+      "name": "박상원",
+      "email": "sangwuny@naver.com",
+      "birth": "2001-04-14",
+      "phone": "010-4930-0640",
+      "password": "1234",
+      "profileImage": "profile1.png"
+    },
+    {
+      "id": "user_1744088486759",
+      "name": "박성빈",
+      "email": "asdf@naver.com",
+      "birth": "2025-04-07",
+      "phone": "010-1234-5678",
+      "password": "1234",
+      "profileImage": "profile4.png"
+    },
+    {
+      "id": "user_1744088726036",
+      "name": "최성보",
+      "email": "qwer@naver.com",
+      "birth": "2025-04-09",
+      "phone": "010-0000-0000",
+      "password": "1234",
+      "profileImage": "profile2.png"
     }
   ],
   "transactions": [
