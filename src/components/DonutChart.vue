@@ -3,7 +3,8 @@
     <h2>월별 카테고리별 지출 도넛 차트</h2>
     <canvas ref="doughnutCanvas"></canvas>
   </div>
-  <div>{{ filteredData }}</div>
+  <button @click="changeMonth(3)">버튼</button>
+  <!-- <div>{{ filteredData }}</div> -->
 </template>
 
 <script setup>
@@ -24,8 +25,9 @@ Chart.register(DoughnutController, ArcElement, Tooltip, Legend);
 
 const doughnutCanvas = ref(null);
 const transactionStore = useTransactionStore();
+const changeMonth = transactionStore.changeCurMonth;
 
-const filteredData = computed(() => transactionStore.curMonthTransactionList);
+const filteredData = computed(() => transactionStore.curMonthExpenseList);
 
 const categoryData = computed(() => {
   const data = {};
