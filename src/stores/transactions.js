@@ -44,11 +44,41 @@ export const useTransactionStore = defineStore('transactions', () => {
     return filtered;
   });
 
+  const nextMonth = () => {
+    if (states.currentMonth == 12) {
+      states.currentYear += 1;
+      states.currentMonth = 1;
+    } else {
+      states.currentMonth += 1;
+    }
+  };
+
+  const prevMonth = () => {
+    if (states.currentMonth == 1) {
+      states.currentYear -= 1;
+      states.currentMonth = 12;
+    } else {
+      states.currentMonth -= 1;
+    }
+  };
+
+  const curYear = computed(() => {
+    return states.currentYear;
+  });
+
+  const curMonth = computed(() => {
+    return states.currentMonth;
+  });
+
   return {
     ...states,
     curMonthTransactionList2,
     curMonthExpenseList,
+    curYear,
+    curMonth,
     fetchTransactionListByUserId,
     changeCurMonth,
+    nextMonth,
+    prevMonth,
   };
 });

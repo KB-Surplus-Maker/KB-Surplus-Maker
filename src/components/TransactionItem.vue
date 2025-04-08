@@ -1,5 +1,6 @@
 <template>
-  <tr>
+  <tr @click="$emit('click', transaction)" style="cursor: pointer">
+    >
     <td>
       {{
         `${transaction.date.year}

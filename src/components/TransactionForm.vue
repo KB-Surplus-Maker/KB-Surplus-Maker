@@ -134,33 +134,7 @@ const saveTransaction = async () => {
 </script>
 
 <style>
-/*TransitionForm & TransitionDetailModal: 모달 페이지 공통 속성성*/
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.modal-header h3 {
-  font-size: 1.3rem;
-  color: #003366;
-}
-
-.modal-header button {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: #999;
-}
-
-.modal-body form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+/*TransitionForm & TransitionDetailModal: 모달 페이지 공통 속성*/
 
 label {
   font-weight: 600;

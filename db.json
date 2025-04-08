@@ -380,6 +380,32 @@
       "price": 4800,
       "category": "카페&디저트",
       "memo": "딸기라떼"
+    },
+    {
+      "id": "txn1744095121043",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "03",
+        "day": "10"
+      },
+      "type": "income",
+      "price": 5000000,
+      "category": "월급",
+      "memo": "월급!"
+    },
+    {
+      "id": "txn1744095161327",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "03",
+        "day": "08"
+      },
+      "type": "expense",
+      "price": 6000,
+      "category": "식비",
+      "memo": "김밥"
     }
   ]
 }

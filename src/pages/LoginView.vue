@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-5" style="max-width: 400px">
-    <h2 class="mb-4">로그인</h2>
+    <h2 class="mb-4" style="text-align: center">로그인</h2>
     <form @submit.prevent="handleLogin">
       <input
         v-model="email"
