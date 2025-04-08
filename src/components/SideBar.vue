@@ -41,7 +41,17 @@
         data-bs-toggle="dropdown"
         aria-expanded="false"
       >
-        <strong>사용자</strong>
+        <!-- ✅ 프로필 이미지 추가 -->
+        <img
+          :src="`/assets/profile-images/${
+            user.currentUser?.profileImage || 'profile1.png'
+          }`"
+          alt="프로필"
+          width="32"
+          height="32"
+          class="rounded-circle me-2"
+        />
+        <strong>{{ user.currentUser?.name || "사용자" }}</strong>
       </a>
       <ul class="dropdown-menu text-small shadow">
         <li><a class="dropdown-item" @click="goToProfile()">프로필 설정</a></li>
@@ -53,21 +63,21 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
-import { useUserStore } from '@/stores/userStore';
+import { useRoute, useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore";
 
 const route = useRoute();
 const router = useRouter();
 
 const goToProfile = () => {
-  router.push('/profile');
+  router.push("/profile");
 };
 
 const user = useUserStore();
 
 const signout = () => {
   user.logout();
-  router.push('/');
+  router.push("/");
 };
 </script>
 
