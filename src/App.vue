@@ -24,7 +24,6 @@ const transactionStore = useTransactionStore();
 const getTransactionList = transactionStore.fetchTransactionListByUserId;
 
 getTransactionList('user1');
-console.log('끝');
 </script>
 
 <style>
