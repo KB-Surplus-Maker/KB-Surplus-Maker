@@ -8,7 +8,6 @@ export const useTransactionStore = defineStore('transactions', () => {
   const states = reactive({
     transactionList: [],
     currentMonth: today.getMonth() + 1,
-    currentYear: today.getFullYear(),
   });
 
   const fetchTransactionListByUserId = async (userId) => {
@@ -48,8 +47,19 @@ export const useTransactionStore = defineStore('transactions', () => {
 
     return filtered;
   });
+  
+  const curMonthTransactionList2 = computed(() => {
+    const filtered = states.transactionList.filter(
+      (transaction) => parseInt(transaction.date.month) === states.currentMonth
+    );
+    
+    return filtered;
+  });
 
   return {
+    ...states,
+    curMonthTransactionList,
+    curMonthTransactionList2,
     curMonthExpenseList,
     fetchTransactionListByUserId,
     changeCurMonth,

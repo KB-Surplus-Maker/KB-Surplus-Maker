@@ -25,6 +25,7 @@
 
 <script setup>
 import DonutChart from '@/components/DonutChart.vue';
+import TransactionList from '@/components/TransactionList.vue';
 import LineChart from '@/components/LineChart.vue';
 import { useTransactionStore } from '@/stores/transactions';
 import { computed, reactive } from 'vue';
