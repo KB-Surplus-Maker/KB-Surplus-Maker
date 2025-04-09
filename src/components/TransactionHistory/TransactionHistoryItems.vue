@@ -1,6 +1,7 @@
 <template>
   <tr>
-    <td>{{ `${item.date.year}.${item.date.month}.${item.date.day} ` }}</td>
+    <td>{{}}</td>
+    <!-- `${item.date.year}.${item.date.month}.${item.date.day} ` -->
     <td>
       <span
         class="badge rounded-pill"
@@ -8,7 +9,11 @@
         >{{ item.type }}</span
       >
     </td>
-    <td>{{ item.price }} 원</td>
+    <td>
+      <span :class="item.type === 'expense' ? 'text-danger' : 'text-primary'">
+        {{ item.type === 'expense' ? '-' : '+' }}{{ item.price }}</span
+      >
+    </td>
     <td>{{ item.category }}</td>
     <td>{{ item.memo }}</td>
   </tr>

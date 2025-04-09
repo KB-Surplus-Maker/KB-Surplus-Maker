@@ -6,6 +6,7 @@ import ProfileView from "@/pages/ProfileView.vue";
 import LoginView from "@/pages/LoginView.vue";
 import SignupView from "@/pages/SignupView.vue";
 import { useUserStore } from "@/stores/userStore";
+import NotFound from "@/pages/NotFound.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,6 +44,11 @@ const router = createRouter({
       path: "/signup",
       name: "Signup",
       component: SignupView,
+    },
+    {
+      path: "/:pathMatch(.*)*",
+      name: "NotFound",
+      component: NotFound,
     },
   ],
 });
