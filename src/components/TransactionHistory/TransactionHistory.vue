@@ -44,27 +44,52 @@
     </div>
 
     <hr />
+    <!--거래 목록-->
     <TransactionHistoryList
       :selectedCategory="selectedCategory"
       :yearMonth="formattedYearMonth"
       @update:tableData="(data) => (tableData.value = data)"
       @update:categories="(data) => (categories = data)"
+      @select-transaction="openModal"
     ></TransactionHistoryList>
+
+    <!--거래 상세 모달-->
+    <TransactionDetailModal
+      v-if="selectedTransaction"
+      :show="isModalOpen"
+      :transaction="selectedTransaction"
+      @close="closeModal"
+      @save="updateTransaction"
+    ></TransactionDetailModal>
   </div>
 </template>
 
 <script setup>
 import { computed, ref, watch } from 'vue';
 import TransactionHistoryList from './TransactionHistoryList.vue';
+import TransactionDetailModal from '../TransactionDetailModal.vue';
+import axios from 'axios';
 
 const tableData = ref([]);
 const categories = ref([]);
 const selectedCategory = ref('all');
 
-watch(categories, (newVal) => {
-  console.log('categories updated:', newVal);
-});
+//모달 상태
+const selectedTransaction = ref(null);
+const isModalOpen = ref(false);
 
+//거래내역 클릭 시 모달 열기
+const openModal = (transaction) => {
+  selectedTransaction.value = transaction;
+  isModalOpen.value = true;
+};
+
+//모달 닫기
+const closeModal = () => {
+  isModalOpen.value = false;
+};
+
+//카테고리 필터링
 const selectCategory = (category) => {
   selectedCategory.value = category;
 };
@@ -96,7 +121,34 @@ const nextMonth = () => {
   newDate.setMonth(currentDate.value.getMonth() + 1);
   currentDate.value = newDate;
 };
+
+watch(categories, (newVal) => {
+  console.log('categories updated:', newVal);
+});
+
+//상세내역 modal : 수정 값 저장
+const updateTransaction = async (updated) => {
+  try {
+    await axios.put(
+      `http://localhost:3000/transactions/${updated.id}`,
+      updated
+    );
+
+    // ✅ 목록 다시 요청해서 갱신
+    const response = await axios.get('http://localhost:3000/transactions');
+    tableData.value = response.data;
+
+    // ✅ 선택된 거래 내역 초기화 (중복 모달 방지)
+    selectedTransaction.value = null;
+
+    closeModal();
+  } catch (error) {
+    console.error('수정 실패:', error);
+    alert('거래 수정에 실패했습니다.');
+  }
+};
 </script>
+
 <style scoped>
 .fixed-width {
   min-width: 120px; /* 혹은 width: 160px; 완전 고정도 가능 */
