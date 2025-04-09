@@ -129,9 +129,12 @@ const updateTransaction = async (updated) => {
       updated
     );
 
-    // ✅ 저장 후 전체 데이터 다시 불러오기
+    // ✅ 목록 다시 요청해서 갱신
     const response = await axios.get('http://localhost:3000/transactions');
     tableData.value = response.data;
+
+    // ✅ 선택된 거래 내역 초기화 (중복 모달 방지)
+    selectedTransaction.value = null;
 
     closeModal();
   } catch (error) {

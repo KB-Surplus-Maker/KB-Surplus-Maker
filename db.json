@@ -309,8 +309,8 @@
       },
       "type": "income",
       "price": 90000,
-      "category": "etc",
-      "memo": "현금 선물"
+      "category": "",
+      "memo": "돈줘"
     },
     {
       "id": "txn020",
@@ -322,8 +322,8 @@
       },
       "type": "expense",
       "price": 6000,
-      "category": "food",
-      "memo": "편의점"
+      "category": "병원",
+      "memo": "편의점 투어 ㅋㅋ"
     },
     {
       "id": "txn1744074784975",
@@ -343,13 +343,13 @@
       "userId": "user1",
       "date": {
         "year": "2025",
-        "month": "04",
-        "day": "09"
+        "month": "4",
+        "day": "9"
       },
       "type": "expense",
       "price": 10000,
       "category": "식비",
-      "memo": "밥밥"
+      "memo": "고등어 백반"
     },
     {
       "id": "txn1744089350881",
@@ -415,6 +415,45 @@
       "price": 6000,
       "category": "식비",
       "memo": "김밥"
+    },
+    {
+      "id": "txn1744178354214",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "4",
+        "day": "9"
+      },
+      "type": "income",
+      "price": 600000,
+      "category": "",
+      "memo": "엄마!"
+    },
+    {
+      "id": "txn1744179064591",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "10"
+      },
+      "type": "income",
+      "price": 500000,
+      "category": "월급",
+      "memo": "용돈"
+    },
+    {
+      "id": "txn1744179197628",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "4",
+        "day": "9"
+      },
+      "type": "income",
+      "price": 4000,
+      "category": "투자수익",
+      "memo": "배당금/ 삼성"
     }
   ]
 }

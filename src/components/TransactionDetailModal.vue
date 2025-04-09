@@ -91,6 +91,7 @@
 
 <script setup>
 import { ref, watch, computed } from 'vue';
+import axios from 'axios';
 import '@/assets/modal.css';
 
 const props = defineProps({
@@ -109,7 +110,6 @@ const expenseCategories = [
   '식비',
   '교통',
   '카페&디저트',
-
   '쇼핑',
   '문화생활',
   '공과금',
@@ -148,13 +148,34 @@ const enableEdit = () => {
 };
 
 //저장
-const saveChanges = () => {
-  emit('save', {
-    ...props.transaction, // 필수 원본 정보
-    ...editableTransaction.value, // 수정한 값
-  });
-  isEditing.value = false;
-  emit('close');
+const saveChanges = async () => {
+  try {
+    const cleanedData = {
+      id: editableTransaction.value.id,
+      userId: editableTransaction.value.userId,
+      date: {
+        year: String(editableTransaction.value.date.year),
+        month: String(Number(editableTransaction.value.date.month)),
+        day: String(Number(editableTransaction.value.date.day)),
+      },
+      type: editableTransaction.value.type,
+      price: editableTransaction.value.price,
+      category: editableTransaction.value.category,
+      memo: editableTransaction.value.memo,
+    };
+
+    await axios.put(
+      `http://localhost:3000/transactions/${cleanedData.id}`,
+      cleanedData
+    );
+
+    emit('updateSuccess');
+    isEditing.value = false;
+    emit('close');
+  } catch (error) {
+    console.error('수정 실패:', error);
+    alert('서버에 저장 실패!');
+  }
 };
 
 const formatDate = (date) => {
