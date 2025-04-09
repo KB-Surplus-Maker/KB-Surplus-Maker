@@ -1,11 +1,23 @@
 <template>
   <div class="d-flex min-vh-100">
     <!-- Sidebar -->
-    <div
+    <!-- <div
       class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar"
       style="width: 250px"
     >
       <SideBar />
+    </div> -->
+
+    <div
+      class="d-flex flex-column p-3 bg-light sidebar"
+      :class="{
+        collapsed: !isSidebarOpen && isMobile,
+        'd-md-block': true,
+      }"
+    >
+      <button class="hamburger-btn d-md-none" @click="toggleSidebar">☰</button>
+
+      <SideBar v-if="isSidebarOpen || !isMobile" />
     </div>
 
     <!-- Main Content -->
@@ -22,12 +34,26 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted } from 'vue';
 import { useTransactionStore } from './stores/transactions';
 import { useUserStore } from './stores/userStore';
 import SideBar from './components/SideBar.vue';
 import TransactionForm from './components/TransactionForm.vue';
 import AddButton from './components/AddButton.vue';
+
+const isSidebarOpen = ref(false);
+const isMobile = ref(false);
+const toggleSidebar = () => {
+  isSidebarOpen.value = !isSidebarOpen.value;
+};
+const checkMobile = () => {
+  isMobile.value = window.innerWidth < 768;
+};
+
+onMounted(() => {
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
+});
 
 // 스토어 불러오기
 const transactionStore = useTransactionStore();
@@ -53,5 +79,37 @@ watch(
 <style>
 body {
   background-color: #f4f8fb;
+}
+.sidebar {
+  width: 250px;
+  transition: all 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 60px;
+  overflow: hidden;
+}
+
+.hamburger-btn {
+  margin-bottom: 1rem;
+  align-self: flex-start;
+
+  width: 40px;
+  height: 40px;
+  font-size: 24px;
+
+  background-color: white;
+  border: 1px solid #007bff;
+  border-radius: 6px;
+  color: #007bff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hamburger-btn:hover {
+  background-color: #007bff;
+  color: white;
 }
 </style>
