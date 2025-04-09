@@ -74,7 +74,7 @@ const tableData = ref([]);
 const categories = ref([]);
 const selectedCategory = ref('all');
 
-//모달 상태
+//모달 상태요
 const selectedTransaction = ref(null);
 const isModalOpen = ref(false);
 
