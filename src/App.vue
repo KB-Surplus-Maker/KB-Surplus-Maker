@@ -22,12 +22,12 @@
 </template>
 
 <script setup>
-import { ref, watch } from "vue";
-import { useTransactionStore } from "./stores/transactions";
-import { useUserStore } from "./stores/userStore";
-import SideBar from "./components/SideBar.vue";
-import TransactionForm from "./pages/TransactionForm.vue";
-import AddButton from "./components/AddButton.vue";
+import { ref, watch } from 'vue';
+import { useTransactionStore } from './stores/transactions';
+import { useUserStore } from './stores/userStore';
+import SideBar from './components/SideBar.vue';
+import TransactionForm from './components/TransactionForm.vue';
+import AddButton from './components/AddButton.vue';
 
 // 스토어 불러오기
 const transactionStore = useTransactionStore();
