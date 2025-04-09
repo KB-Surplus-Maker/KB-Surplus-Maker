@@ -3,9 +3,9 @@
     <thead>
       <tr>
         <th>날짜</th>
+        <th>금액</th>
         <th>카테고리</th>
         <th>메모</th>
-        <th>지출내역</th>
       </tr>
     </thead>
     <tbody>
@@ -28,5 +28,21 @@ import TransactionItem from './TransactionItem.vue';
 
 const transactionStore = useTransactionStore();
 
-const filteredData = computed(() => transactionStore.curMonthTransactionList2);
+const filteredData = computed(() => {
+  return [...transactionStore.curMonthTransactionList2].sort((a, b) => {
+    const aDate = new Date(
+      `${a.date.year}-${a.date.month.padStart(2, '0')}-${a.date.day.padStart(
+        2,
+        '0'
+      )}`
+    );
+    const bDate = new Date(
+      `${b.date.year}-${b.date.month.padStart(2, '0')}-${b.date.day.padStart(
+        2,
+        '0'
+      )}`
+    );
+    return bDate - aDate; // 최신순 정렬
+  });
+});
 </script>
