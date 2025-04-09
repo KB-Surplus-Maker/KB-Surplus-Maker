@@ -29,6 +29,15 @@
           💵 거래내역
         </router-link>
       </li>
+      <li>
+        <router-link
+          to="/calendar"
+          class="nav-link"
+          :class="{ active: route.path === '/calendar' }"
+        >
+          📅 달력
+        </router-link>
+      </li>
       <!-- <li>
         <a @click="goTo('/calendar')" class="nav-link link-dark"> 💸 달력 </a>
       </li> -->
