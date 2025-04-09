@@ -14,7 +14,7 @@
           <p>
             <strong>날짜:</strong> {{ formatDate(editableTransaction.date) }}
           </p>
-
+          <!--분류: 라디오 버튼-->
           <label><strong>분류:</strong></label>
           <template v-if="isEditing">
             <div>
@@ -45,12 +45,21 @@
             ><input v-model.number="editableTransaction.price" type="number" />
           </template>
           <template v-else>
-            <p>{{ editableTransaction.price.toLocaleString() }}</p>
+            <p>{{ editableTransaction.price.toLocaleString() }}원</p>
           </template>
-
+          <!--카테고리: select -->
           <label><strong>카테고리:</strong></label>
           <template v-if="isEditing">
-            <input v-model="editableTransaction.category" type="text" />
+            <select v-model="editableTransaction.category">
+              <option disabled value="">-- 선택 --</option>
+              <option
+                v-for="option in categoryOptions"
+                :key="option"
+                :value="option"
+              >
+                {{ option }}
+              </option>
+            </select>
           </template>
           <template v-else>
             <p>{{ editableTransaction.category }}</p>
@@ -81,25 +90,48 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch, computed } from 'vue';
 import '@/assets/modal.css';
 
-//분류: 수입지출 >> 라디오버튼
-const typeText = (val) => {
-  return val === 'income' ? '수입' : val === 'expense' ? '지출' : '';
-};
 const props = defineProps({
   show: Boolean,
   transaction: Object,
 });
 
 const emit = defineEmits(['close', 'save']);
-const editableTransaction = ref({ ...props.transaction });
+const editableTransaction = ref({ ...props.transaction }); // ✅ 먼저 선언!
 
-// 편집 모드
 const isEditing = ref(false);
 
-// props 변경 시 데이터 초기화
+// 분류에 따라 카테고리 옵션 반환
+const incomeCategories = ['월급', '보너스', '용돈', '투자수익', '기타'];
+const expenseCategories = [
+  '식비',
+  '교통',
+  '카페&디저트',
+  '뷰티',
+  '쇼핑',
+  '생활',
+  '기타',
+];
+
+const categoryOptions = computed(() => {
+  if (editableTransaction.value.type === 'income') return incomeCategories;
+  if (editableTransaction.value.type === 'expense') return expenseCategories;
+  return [];
+});
+
+//  type 변경 시 category 초기화
+watch(
+  () => editableTransaction.value.type,
+  (newType) => {
+    if (newType === 'income' || newType === 'expense') {
+      editableTransaction.value.category = '';
+    }
+  }
+);
+
+// props.transaction이 바뀌면 재설정
 watch(
   () => props.transaction,
   (newTransaction) => {
@@ -109,15 +141,13 @@ watch(
   { immediate: true }
 );
 
-//수정 버튼 클릭 시 편집 모드 전환
 const enableEdit = () => {
   isEditing.value = true;
 };
 
-// 저장버튼 클릭 시 상위로 emit
 const saveChanges = () => {
   emit('save', editableTransaction.value);
-  isEditing.value = false; //편집모드 종료
+  isEditing.value = false;
   emit('close');
 };
 
@@ -127,6 +157,9 @@ const formatDate = (date) => {
     '0'
   )}`;
 };
+
+const typeText = (val) =>
+  val === 'income' ? '수입' : val === 'expense' ? '지출' : '';
 </script>
 
 <style scoped>
