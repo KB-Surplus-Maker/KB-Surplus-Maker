@@ -44,6 +44,15 @@
       "phone": "010-2222-3333",
       "password": "1234",
       "profileImage": "profile1.png"
+    },
+    {
+      "id": "user_1744158912381",
+      "name": "cat",
+      "email": "cat@naver.com",
+      "birth": "2025-04-08",
+      "phone": "010-1234-5678",
+      "password": "catcatcat",
+      "profileImage": "profile1.png"
     }
   ],
   "transactions": [

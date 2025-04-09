@@ -1,12 +1,17 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center my-3 gap-3">
-    <button class="btn btn-outline-secondary" @click="prevMonth">◀</button>
-    <div class="fs-5">{{ formattedYearMonth }}</div>
-    <button class="btn btn-outline-secondary" @click="nextMonth">▶</button>
-  </div>
   <div class="container">
+    <!-- 년.월 컨트롤 -->
+    <div class="d-flex justify-content-center align-items-center my-3 gap-3">
+      <button class="btn btn-outline-secondary" @click="prevMonth">◀</button>
+      <div class="fs-5">{{ formattedYearMonth }}</div>
+      <button class="btn btn-outline-secondary" @click="nextMonth">▶</button>
+    </div>
+    <!-- ~년.월 컨트롤 -->
+
     <div class="d-flex justify-content-between align-items-center my-3">
       <div class="fs-3">상세 내역</div>
+
+      <!-- 드롭다운 버튼 -->
       <div class="dropdown">
         <button
           class="btn btn-secondary dropdown-toggle fixed-width"
@@ -35,6 +40,7 @@
           </li>
         </ul>
       </div>
+      <!-- ~드롭다운 버튼 끝 -->
     </div>
 
     <hr />
