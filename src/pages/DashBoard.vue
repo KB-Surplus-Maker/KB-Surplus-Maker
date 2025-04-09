@@ -12,13 +12,13 @@
     </div>
     <!-- 상단 차트 영역 -->
     <div class="row mb-4">
-      <div class="col-12 col-md-6 mb-4">
+      <div class="col-10 col-md-6 mb-4">
         <div class="chart-wrapper">
           <LineChart :chartData="chartData" :options="chartOptions" />
         </div>
       </div>
 
-      <div class="col-12 col-md-6 mb-4">
+      <div class="col-10 col-md-6 mb-4">
         <div class="chart-wrapper">
           <DonutChart />
         </div>

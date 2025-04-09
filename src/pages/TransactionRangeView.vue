@@ -33,7 +33,7 @@
       v-if="filteredTransactions.length"
     >
       <button class="btn btn-sm btn-outline-secondary" @click="toggleSortOrder">
-        {{ sortDesc ? "최신순 🔽" : "오래된순 🔼" }}
+        {{ sortDesc ? '최신순 🔽' : '오래된순 🔼' }}
       </button>
     </div>
 
@@ -52,7 +52,7 @@
         <tbody>
           <tr v-for="txn in paginatedTransactions" :key="txn.id">
             <td>{{ formatDate(txn.date) }}</td>
-            <td>{{ txn.type === "income" ? "수입" : "지출" }}</td>
+            <td>{{ txn.type === 'income' ? '수입' : '지출' }}</td>
             <td :class="txn.type === 'income' ? 'text-success' : 'text-danger'">
               ₩{{ txn.price.toLocaleString() }}
             </td>
@@ -99,13 +99,13 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
-import axios from "axios";
-import { useUserStore } from "@/stores/userStore";
+import { ref, computed } from 'vue';
+import axios from 'axios';
+import { useUserStore } from '@/stores/userStore';
 
 const userStore = useUserStore();
-const startDate = ref("");
-const endDate = ref("");
+const startDate = ref('');
+const endDate = ref('');
 const transactions = ref([]);
 const filteredTransactions = ref([]);
 const currentPage = ref(1);
@@ -113,17 +113,22 @@ const itemsPerPage = 10;
 const sortDesc = ref(true);
 
 const categories = [
-  "전체",
-  "식비",
-  "교통",
-  "카페&디저트",
-  "쇼핑",
-  "생활",
-  "문화생활",
-  "공과금",
-  "기타",
+  '전체',
+  '카페&디저트',
+  '쇼핑',
+  '공과금',
+  '교통',
+  '월급',
+  '문화생활',
+  '생활',
+  '기타',
+  '용돈',
+  '병원',
+  '투자수익',
+  '보너스',
+  '식비',
 ];
-const selectedCategory = ref("전체");
+const selectedCategory = ref('전체');
 
 // 거래 가져오기
 const fetchTransactions = async () => {
@@ -144,7 +149,7 @@ const filterTransactions = () => {
     const tDate = new Date(`${t.date.year}-${t.date.month}-${t.date.day}`);
     const inDateRange = tDate >= start && tDate <= end;
     const inCategory =
-      selectedCategory.value === "전체" ||
+      selectedCategory.value === '전체' ||
       t.category === selectedCategory.value;
     return inDateRange && inCategory;
   });
@@ -169,9 +174,9 @@ const toggleSortOrder = () => {
 
 // 날짜 출력 형식
 const formatDate = (date) => {
-  return `${date.year}-${String(date.month).padStart(2, "0")}-${String(
+  return `${date.year}-${String(date.month).padStart(2, '0')}-${String(
     date.day
-  ).padStart(2, "0")}`;
+  ).padStart(2, '0')}`;
 };
 
 // 페이지네이션

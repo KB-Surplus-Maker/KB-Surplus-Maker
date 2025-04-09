@@ -29,20 +29,24 @@ import TransactionItem from './TransactionItem.vue';
 const transactionStore = useTransactionStore();
 
 const filteredData = computed(() => {
-  return [...transactionStore.curMonthTransactionList2].sort((a, b) => {
-    const aDate = new Date(
-      `${a.date.year}-${a.date.month.padStart(2, '0')}-${a.date.day.padStart(
-        2,
-        '0'
-      )}`
-    );
-    const bDate = new Date(
-      `${b.date.year}-${b.date.month.padStart(2, '0')}-${b.date.day.padStart(
-        2,
-        '0'
-      )}`
-    );
-    return bDate - aDate; // 최신순 정렬
-  });
+  const filtered = [...transactionStore.curMonthTransactionList2].sort(
+    (a, b) => {
+      const aDate = new Date(
+        `${a.date.year}-${a.date.month.padStart(2, '0')}-${a.date.day.padStart(
+          2,
+          '0'
+        )}`
+      );
+      const bDate = new Date(
+        `${b.date.year}-${b.date.month.padStart(2, '0')}-${b.date.day.padStart(
+          2,
+          '0'
+        )}`
+      );
+      return bDate - aDate; // 최신순 정렬
+    }
+  );
+
+  return filtered.slice(0, 10);
 });
 </script>

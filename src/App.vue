@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex min-vh-100">
+  <div class="d-flex min-vh-100" id="app-wrapper">
     <!-- Sidebar -->
     <!-- <div
       class="d-flex flex-column flex-shrink-0 p-3 bg-light sidebar"
@@ -21,7 +21,7 @@
     </div>
 
     <!-- Main Content -->
-    <div class="flex-grow-1 p-4">
+    <div class="flex-grow-1 p-4" id="main-content">
       <router-view />
     </div>
 
@@ -79,6 +79,23 @@ watch(
 <style>
 body {
   background-color: #f4f8fb;
+}
+
+#app-wrapper {
+  display: flex;
+  height: 100vh; /* 전체 뷰포트 높이 고정 */
+  overflow: hidden;
+}
+Sidebar {
+  width: 240px;
+  min-height: 100%;
+  border-right: 1px solid #dee2e6;
+}
+
+#main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
 }
 .sidebar {
   width: 250px;
