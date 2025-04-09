@@ -72,7 +72,6 @@
 <script setup>
 import { defineProps, defineEmits, reactive } from 'vue';
 import axios from 'axios';
-
 import '@/assets/modal.css';
 
 //수입, 지출 카테고리
