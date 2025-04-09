@@ -73,6 +73,8 @@
 import { defineProps, defineEmits, reactive } from 'vue';
 import axios from 'axios';
 
+import '@/assets/modal.css';
+
 //수입, 지출 카테고리
 const incomeCategories = ['월급', '보너스', '용돈', '투자수익', '기타'];
 const expenseCategories = [
@@ -132,54 +134,7 @@ const saveTransaction = async () => {
 </script>
 
 <style>
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 32, 64, 0.5); /* 진한 블루 반투명 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 999;
-}
-
-.modal-container {
-  background: #ffffff;
-  padding: 2rem;
-  border-radius: 1rem;
-  width: 420px;
-  max-width: 90%;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-  font-family: 'Pretendard', 'Noto Sans KR', sans-serif;
-}
-
-.modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.modal-header h3 {
-  font-size: 1.3rem;
-  color: #003366;
-}
-
-.modal-header button {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  color: #999;
-}
-
-.modal-body form {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
+/*TransitionForm & TransitionDetailModal: 모달 페이지 공통 속성*/
 
 label {
   font-weight: 600;

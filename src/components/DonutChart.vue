@@ -82,9 +82,7 @@ onMounted(() => {
 
 // filteredData가 변할 때마다 다시 그리기
 watch(categoryData, (newVal) => {
-  if (Object.keys(newVal).length > 0) {
-    drawChart();
-  }
+  drawChart();
 });
 </script>
 
