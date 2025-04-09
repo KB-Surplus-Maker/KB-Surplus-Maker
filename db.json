@@ -44,6 +44,15 @@
       "phone": "010-2222-3333",
       "password": "1234",
       "profileImage": "profile1.png"
+    },
+    {
+      "id": "user_1744158912381",
+      "name": "cat",
+      "email": "cat@naver.com",
+      "birth": "2025-04-08",
+      "phone": "010-1234-5678",
+      "password": "catcatcat",
+      "profileImage": "profile1.png"
     }
   ],
   "transactions": [
@@ -7542,14 +7551,13 @@
       "userId": "user_1744075392534",
       "date": {
         "year": "2025",
-        "month": "04",
+        "month": "4",
         "day": "10"
       },
       "type": "expense",
       "price": 762255,
-      "category": "병원",
-      "emoji": "😭",
-      "memo": "예상치 못한 지출"
+      "category": "식비",
+      "memo": "밥"
     },
     {
       "id": "5835ec36-5e61-4967-8bd8-b2f74d6079f8",
