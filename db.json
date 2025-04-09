@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "user1",
-      "name": "Alexa",
+      "name": "Alex",
       "email": "alex@example.com",
       "birth": "2001-04-14",
       "password": "1234",
