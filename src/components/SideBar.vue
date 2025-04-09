@@ -38,6 +38,15 @@
           📅 달력
         </router-link>
       </li>
+      <li>
+        <router-link
+          to="/transaction-range"
+          class="nav-link"
+          :class="{ active: route.path === '/transaction-range' }"
+        >
+          🔍 기간별 상세 조회
+        </router-link>
+      </li>
       <!-- <li>
         <a @click="goTo('/calendar')" class="nav-link link-dark"> 💸 달력 </a>
       </li> -->

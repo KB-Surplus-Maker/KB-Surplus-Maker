@@ -8,6 +8,7 @@ import SignupView from "@/pages/SignupView.vue";
 import { useUserStore } from "@/stores/userStore";
 import NotFound from "@/pages/NotFound.vue";
 import CalendarPage from "@/pages/CalendarPage.vue";
+import TransactionRangeView from "@/pages/TransactionRangeView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -50,6 +51,12 @@ const router = createRouter({
       path: "/calendar",
       name: "Calendar",
       component: CalendarPage,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/transaction-range",
+      name: "TransactionRange",
+      component: TransactionRangeView,
       meta: { requiresAuth: true },
     },
     {
