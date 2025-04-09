@@ -47,32 +47,50 @@ import Summary from '@/components/Summary.vue';
 
 const transactionsStore = useTransactionStore();
 const curMonthExpenses = computed(() => transactionsStore.curMonthExpenseList);
+const curMonthIncomes = computed(() => transactionsStore.curMonthIncomeList);
+
+const visibleLines = reactive({
+  expense: true,
+  income: false,
+});
 
 const chartData = computed(() => {
-  const dailyExpenses = {};
-
-  for (let i = 1; i <= 31; i++) {
-    dailyExpenses[i] = 0;
-  }
+  const daily = Array.from({ length: 31 }, () => ({ expense: 0, income: 0 }));
 
   curMonthExpenses.value.forEach((trans) => {
-    const day = parseInt(trans.date.day);
-
-    dailyExpenses[day] += trans.price;
+    const day = parseInt(trans.date.day) - 1;
+    if (trans.type === 'expense') {
+      daily[day].expense += trans.price;
+    }
   });
 
-  const labels = Array.from({ length: 31 }, (_, i) => `${i + 1}일`);
-  const data = labels.map((_, idx) => dailyExpenses[idx + 1]);
+  curMonthIncomes.value.forEach((trans) => {
+    const day = parseInt(trans.date.day) - 1;
+    if (trans.type === 'income') {
+      daily[day].income += trans.price;
+    }
+  });
+
+  const labels = daily.map((_, i) => `${i + 1}일`);
+  const expenseData = daily.map((d) => d.expense);
+  const incomeData = daily.map((d) => d.income);
 
   return {
-    labels: labels,
+    labels,
     datasets: [
       {
-        label: '일별 지출내역',
-        data: data,
-        fill: false,
-        borderColor: 'rgb(75, 192, 192)',
-        tension: 0.1,
+        label: '지출',
+        data: expenseData,
+        borderColor: 'rgb(255, 99, 132)',
+        tension: 0.3,
+        hidden: !visibleLines.expense,
+      },
+      {
+        label: '수입',
+        data: incomeData,
+        borderColor: 'rgb(54, 162, 235)',
+        tension: 0.3,
+        hidden: !visibleLines.income,
       },
     ],
   };
@@ -87,7 +105,7 @@ const chartOptions = {
     },
     title: {
       display: true,
-      text: '일별 지출 내역',
+      text: '일별 지출/수입 내역',
     },
   },
 };
