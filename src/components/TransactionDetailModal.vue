@@ -83,6 +83,7 @@ watch(
   () => props.transaction,
   (newTransaction) => {
     editableTransaction.value = { ...newTransaction };
+    isEditing.value = false;
   },
   { immediate: true }
 );
@@ -95,6 +96,8 @@ const enableEdit = () => {
 // 저장버튼 클릭 시 상위로 emit
 const saveChanges = () => {
   emit('save', editableTransaction.value);
+  isEditing.value = false; //편집모드 종료
+  emit('close');
 };
 
 const formatDate = (date) => {
