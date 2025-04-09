@@ -1,6 +1,5 @@
 <template>
   <div class="chart-wrapper">
-    <h6>카테고리별 지출</h6>
     <canvas ref="doughnutCanvas"></canvas>
   </div>
 </template>
@@ -51,12 +50,15 @@ function drawChart() {
           label: '지출',
           data: Object.values(categoryData.value),
           backgroundColor: [
-            '#FF6384',
-            '#36A2EB',
-            '#FFCE56',
-            '#8BC34A',
-            '#FF9800',
-            '#9C27B0',
+            '#FF6F61',
+            '#FFB74D',
+            '#FFF176',
+            '#4DD0E1',
+            '#64B5F6',
+            '#9575CD',
+            '#E57373',
+            '#90A4AE',
+            '#AED581',
           ],
           borderWidth: 1,
         },
@@ -67,6 +69,19 @@ function drawChart() {
       plugins: {
         legend: {
           position: 'bottom',
+        },
+        title: {
+          display: true,
+          text: '카테고리별 지출 차트',
+          font: {
+            size: 18,
+            weight: 'bold',
+          },
+          padding: {
+            top: 10,
+            bottom: 20,
+          },
+          color: '#333',
         },
       },
     },

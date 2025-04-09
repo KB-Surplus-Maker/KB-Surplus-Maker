@@ -1,18 +1,19 @@
 <template>
   <tr @click="$emit('click', transaction)" style="cursor: pointer">
-    >
     <td>
       {{
         `${transaction.date.year}
-        -
+        .
         ${transaction.date.month.padStart(2, '0')}
-        -
+        .
         ${transaction.date.day.padStart(2, '0')}`
       }}
     </td>
+    <td :class="priceClass">
+      {{ pricePrefix }}{{ transaction.price.toLocaleString() }}
+    </td>
     <td>{{ transaction.category }}</td>
     <td>{{ transaction.memo }}</td>
-    <td :class="priceClass">{{ pricePrefix }}{{ transaction.price }}</td>
   </tr>
 </template>
 
