@@ -63,6 +63,7 @@
 import { computed, ref, watch } from 'vue';
 import TransactionHistoryList from './TransactionHistoryList.vue';
 import TransactionDetailModal from '../TransactionDetailModal.vue';
+import axios from 'axios';
 
 const tableData = ref([]);
 const categories = ref([]);
@@ -81,15 +82,6 @@ const openModal = (transaction) => {
 //모달 닫기
 const closeModal = () => {
   isModalOpen.value = false;
-};
-
-// 수정 & 저장 처리
-const updateTransaction = (updated) => {
-  const index = tableData.value.findIndex((t) => t.id === updated.id);
-  if (index !== -1) {
-    tableData.value[index] = { ...updated };
-  }
-  closeModal();
 };
 
 //카테고리 필터링
@@ -128,7 +120,27 @@ const nextMonth = () => {
 watch(categories, (newVal) => {
   console.log('categories updated:', newVal);
 });
+
+//상세내역 modal : 수정 값 저장
+const updateTransaction = async (updated) => {
+  try {
+    await axios.put(
+      `http://localhost:3000/transactions/${updated.id}`,
+      updated
+    );
+
+    // ✅ 저장 후 전체 데이터 다시 불러오기
+    const response = await axios.get('http://localhost:3000/transactions');
+    tableData.value = response.data;
+
+    closeModal();
+  } catch (error) {
+    console.error('수정 실패:', error);
+    alert('거래 수정에 실패했습니다.');
+  }
+};
 </script>
+
 <style scoped>
 .fixed-width {
   min-width: 120px; /* 혹은 width: 160px; 완전 고정도 가능 */

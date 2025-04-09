@@ -109,9 +109,11 @@ const expenseCategories = [
   '식비',
   '교통',
   '카페&디저트',
-  '뷰티',
+
   '쇼핑',
-  '생활',
+  '문화생활',
+  '공과금',
+  '병원',
   '기타',
 ];
 
@@ -145,8 +147,12 @@ const enableEdit = () => {
   isEditing.value = true;
 };
 
+//저장
 const saveChanges = () => {
-  emit('save', editableTransaction.value);
+  emit('save', {
+    ...props.transaction, // 필수 원본 정보
+    ...editableTransaction.value, // 수정한 값
+  });
   isEditing.value = false;
   emit('close');
 };
