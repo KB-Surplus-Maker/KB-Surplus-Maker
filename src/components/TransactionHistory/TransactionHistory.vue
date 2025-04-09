@@ -1,4 +1,5 @@
 <template>
+  <!--상단: 월 이동 + 카테고리 필터-->
   <div class="d-flex justify-content-center align-items-center my-3 gap-3">
     <button class="btn btn-outline-secondary" @click="prevMonth">◀</button>
     <div class="fs-5">{{ formattedYearMonth }}</div>
@@ -38,27 +39,60 @@
     </div>
 
     <hr />
+    <!--거래 목록-->
     <TransactionHistoryList
       :selectedCategory="selectedCategory"
       :yearMonth="formattedYearMonth"
       @update:tableData="(data) => (tableData.value = data)"
       @update:categories="(data) => (categories = data)"
+      @select-transaction="openModal"
     ></TransactionHistoryList>
+
+    <!--거래 상세 모달-->
+    <TransactionDetailModal
+      v-if="seletedTransaction"
+      :show="isModalOpen"
+      :transaction="selectedTransaction"
+      @close="closeModal"
+      @save="updateTransaction"
+    ></TransactionDetailModal>
   </div>
 </template>
 
 <script setup>
 import { computed, ref, watch } from 'vue';
 import TransactionHistoryList from './TransactionHistoryList.vue';
+import TransactionDetailModal from '../TransactionDetailModal.vue';
 
 const tableData = ref([]);
 const categories = ref([]);
 const selectedCategory = ref('all');
 
-watch(categories, (newVal) => {
-  console.log('categories updated:', newVal);
-});
+//모달 상태
+const seletedTransaction = ref(null);
+const isModalOpen = ref(false);
 
+//거래내역 클릭 시 모달 열기
+const openModal = (transaction) => {
+  selectedTransaction.value = transaction;
+  isModalOpen.value = true;
+};
+
+//모달 닫기
+const closeModal = () => {
+  isModalOpen.value = false;
+};
+
+// 수정 & 저장 처리
+const updateTransaction = (updated) => {
+  const index = tableData.value.findIndex((t) => t.id === updated.id);
+  if (index !== -1) {
+    tableData.value[index] = { ...updated };
+  }
+  closeModal();
+};
+
+//카테고리 필터링
 const selectCategory = (category) => {
   selectedCategory.value = category;
 };
@@ -90,6 +124,10 @@ const nextMonth = () => {
   newDate.setMonth(currentDate.value.getMonth() + 1);
   currentDate.value = newDate;
 };
+
+watch(categories, (newVal) => {
+  console.log('categories updated:', newVal);
+});
 </script>
 <style scoped>
 .fixed-width {

@@ -11,21 +11,52 @@
 
         <!-- 내용 -->
         <div class="modal-body">
-          <p><strong>날짜:</strong> {{ formatDate(transaction.date) }}</p>
-          <p><strong>분류:</strong> {{ transaction.type }}</p>
           <p>
-            <strong>금액:</strong> {{ transaction.price.toLocaleString() }} 원
+            <strong>날짜:</strong> {{ formatDate(editableTransaction.date) }}
           </p>
-          <p><strong>카테고리:</strong> {{ transaction.category }}</p>
-          <p><strong>메모:</strong> {{ transaction.memo }}</p>
+
+          <label><strong>분류:</strong></label>
+          <template v-if="isEditing"
+            ><input v-model="editableTransaction.type" type="text" />
+          </template>
+          <template v-else>
+            <p>{{ editableTransaction.type }}</p>
+          </template>
+
+          <label><strong>금액:</strong></label>
+          <template v-if="isEditing"
+            ><input v-model.number="editableTransaction.price" type="number" />
+          </template>
+          <template v-else>
+            <p>{{ editableTransaction.price.toLocaleString() }}</p>
+          </template>
+
+          <label><strong>카테고리:</strong></label>
+          <template v-if="isEditing">
+            <input v-model="editableTransaction.category" type="text" />
+          </template>
+          <template v-else>
+            <p>{{ editableTransaction.category }}</p>
+          </template>
+
+          <label><strong>메모:</strong></label>
+          <template v-if="isEditing">
+            <input v-model="editableTransaction.memo" type="text" />
+          </template>
+          <template v-else>
+            <p>{{ editableTransaction.memo }}</p>
+          </template>
         </div>
 
         <!-- 하단 버튼 -->
         <div class="modal-actions">
           <button class="cancel-button" @click="$emit('close')">닫기</button>
-          <button class="save-button" @click="$emit('edit', transaction)">
-            수정
-          </button>
+          <template v-if="isEditing">
+            <button class="save-button" @click="saveChanges">저장</button>
+          </template>
+          <template v-else>
+            <button class="save-button" @click="enableEdit">수정</button>
+          </template>
         </div>
       </div>
     </div>
@@ -33,12 +64,38 @@
 </template>
 
 <script setup>
+import { ref, watch } from 'vue';
 import '@/assets/modal.css';
-defineProps({
+
+const props = defineProps({
   show: Boolean,
   transaction: Object,
 });
-defineEmits(['close', 'edit']);
+
+const emit = defineEmits(['close', 'save']);
+const editableTransaction = ref({ ...props.transaction });
+
+// 편집 모드
+const isEditing = ref(false);
+
+// props 변경 시 데이터 초기화
+watch(
+  () => props.transaction,
+  (newTransaction) => {
+    editableTransaction.value = { ...newTransaction };
+  },
+  { immediate: true }
+);
+
+//수정 버튼 클릭 시 편집 모드 전환
+const enableEdit = () => {
+  isEditing.value = true;
+};
+
+// 저장버튼 클릭 시 상위로 emit
+const saveChanges = () => {
+  emit('save', editableTransaction.value);
+};
 
 const formatDate = (date) => {
   return `${date.year}.${date.month.padStart(2, '0')}.${date.day.padStart(
@@ -58,8 +115,16 @@ const formatDate = (date) => {
 }
 
 .modal-body {
-  line-height: 1.8;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
   color: #333;
+}
+
+.modal-body input {
+  padding: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .modal-actions {
