@@ -20512,13 +20512,12 @@
       "userId": "user_1744088726036",
       "date": {
         "year": "2025",
-        "month": "04",
+        "month": "4",
         "day": "10"
       },
-      "type": "income",
+      "type": "expense",
       "price": 483138,
-      "category": "기타",
-      "emoji": "🤬",
+      "category": "",
       "memo": "급하게 쓴 돈"
     },
     {
@@ -23623,9 +23622,9 @@
         "month": "4",
         "day": "10"
       },
-      "type": "expense",
+      "type": "income",
       "price": 630166,
-      "category": "기타",
+      "category": "",
       "memo": "예상치 못한 지출"
     },
     {
