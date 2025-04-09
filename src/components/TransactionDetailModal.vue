@@ -190,6 +190,7 @@ const typeText = (val) =>
 </script>
 
 <style scoped>
+@import '@/assets/modal.css';
 .modal-header button {
   background: none;
   border: none;
