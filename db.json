@@ -9832,14 +9832,13 @@
       "userId": "user_1744075392534",
       "date": {
         "year": "2025",
-        "month": "04",
+        "month": "4",
         "day": "10"
       },
       "type": "income",
       "price": 107784,
-      "category": "월급",
-      "emoji": "😄",
-      "memo": "계획된 소비"
+      "category": "보너스",
+      "memo": "예상했던 수입22222"
     },
     {
       "id": "2d863c25-01b4-4e71-9d31-711cd64fd8b4",
@@ -18232,13 +18231,12 @@
       "userId": "user_1744075392534",
       "date": {
         "year": "2025",
-        "month": "04",
+        "month": "4",
         "day": "10"
       },
       "type": "expense",
       "price": 922149,
-      "category": "쇼핑",
-      "emoji": "🤬",
+      "category": "",
       "memo": "급하게 쓴 돈"
     },
     {
@@ -23622,13 +23620,12 @@
       "userId": "user_1744088726036",
       "date": {
         "year": "2025",
-        "month": "04",
+        "month": "4",
         "day": "10"
       },
-      "type": "income",
+      "type": "expense",
       "price": 630166,
       "category": "기타",
-      "emoji": "😄",
       "memo": "예상치 못한 지출"
     },
     {
@@ -28054,6 +28051,45 @@
       "category": "용돈",
       "emoji": "🙂",
       "memo": "급하게 쓴 돈"
+    },
+    {
+      "id": "txn1744187051010",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "09"
+      },
+      "type": "income",
+      "price": 3333,
+      "category": "월급",
+      "memo": "3333"
+    },
+    {
+      "id": "txn1744187137316",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "09"
+      },
+      "type": "expense",
+      "price": 13000,
+      "category": "식비",
+      "memo": "고등어 ㅎㅎ"
+    },
+    {
+      "id": "txn1744187176001",
+      "userId": "user1",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "10"
+      },
+      "type": "expense",
+      "price": 1400,
+      "category": "교통",
+      "memo": "지옥철 ㅜ"
     }
   ]
 }
