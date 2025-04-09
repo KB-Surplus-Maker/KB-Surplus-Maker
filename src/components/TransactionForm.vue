@@ -126,6 +126,7 @@ const saveTransaction = async () => {
     await axios.post('http://localhost:3000/transactions', transaction);
     alert('저장 완료!');
     close();
+    window.location.reload(); // 전체 페이지 새로고침
   } catch (error) {
     console.error('저장 실패:', error);
     alert('오류 발생');
