@@ -126,8 +126,13 @@ const categoryOptions = computed(() => {
 //  type 변경 시 category 초기화
 watch(
   () => editableTransaction.value.type,
-  (newType) => {
-    if (newType === 'income' || newType === 'expense') {
+  (newType, oldType) => {
+    // 새로 선택한 타입이 기존과 다르고, 현재 새 입력 중일 때만 초기화
+    if (
+      isEditing.value &&
+      (newType === 'income' || newType === 'expense') &&
+      newType !== oldType
+    ) {
       editableTransaction.value.category = '';
     }
   }
@@ -149,6 +154,10 @@ const enableEdit = () => {
 
 //저장
 const saveChanges = async () => {
+  if (!editableTransaction.value.category) {
+    alert('카테고리를 선택해 주세요.');
+    return;
+  }
   try {
     const cleanedData = {
       id: editableTransaction.value.id,
