@@ -16,11 +16,28 @@
           </p>
 
           <label><strong>분류:</strong></label>
-          <template v-if="isEditing"
-            ><input v-model="editableTransaction.type" type="text" />
+          <template v-if="isEditing">
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  value="income"
+                  v-model="editableTransaction.type"
+                />
+                수입
+              </label>
+              <label style="margin-left: 1rem">
+                <input
+                  type="radio"
+                  value="expense"
+                  v-model="editableTransaction.type"
+                />
+                지출
+              </label>
+            </div>
           </template>
           <template v-else>
-            <p>{{ editableTransaction.type }}</p>
+            <p>{{ typeText(editableTransaction.type) }}</p>
           </template>
 
           <label><strong>금액:</strong></label>
@@ -67,6 +84,10 @@
 import { ref, watch } from 'vue';
 import '@/assets/modal.css';
 
+//분류: 수입지출 >> 라디오버튼
+const typeText = (val) => {
+  return val === 'income' ? '수입' : val === 'expense' ? '지출' : '';
+};
 const props = defineProps({
   show: Boolean,
   transaction: Object,

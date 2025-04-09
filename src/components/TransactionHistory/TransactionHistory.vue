@@ -50,7 +50,7 @@
 
     <!--거래 상세 모달-->
     <TransactionDetailModal
-      v-if="seletedTransaction"
+      v-if="selectedTransaction"
       :show="isModalOpen"
       :transaction="selectedTransaction"
       @close="closeModal"
@@ -69,7 +69,7 @@ const categories = ref([]);
 const selectedCategory = ref('all');
 
 //모달 상태
-const seletedTransaction = ref(null);
+const selectedTransaction = ref(null);
 const isModalOpen = ref(false);
 
 //거래내역 클릭 시 모달 열기
