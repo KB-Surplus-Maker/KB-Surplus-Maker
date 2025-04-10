@@ -2,7 +2,7 @@
   <div class="container">
     <table class="table table-hover">
       <thead>
-        <tr>
+        <tr style="font-weight: bold; font-size: large">
           <td class="fixed-width">날짜</td>
           <td>분류</td>
           <td>금액</td>
