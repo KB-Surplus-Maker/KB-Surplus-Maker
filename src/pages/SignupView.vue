@@ -56,8 +56,10 @@ const router = useRouter();
 const handleSignup = async () => {
   try {
     await userStore.signup(form.value);
-    alert('회원가입 완료! 로그인되었습니다.');
-    router.push('/login');
+
+    alert("회원가입 완료! 로그인되었습니다.");
+    router.push("/");
+
   } catch (err) {
     alert(err.message);
   }

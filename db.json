@@ -18181,19 +18181,6 @@
       "memo": "급하게 쓴 돈"
     },
     {
-      "id": "a512be6e-271d-4ae4-8f65-20801b51ec15",
-      "userId": "user_1744075392534",
-      "date": {
-        "year": "2025",
-        "month": "4",
-        "day": "10"
-      },
-      "type": "expense",
-      "price": 922149,
-      "category": "",
-      "memo": "급하게 쓴 돈"
-    },
-    {
       "id": "2241dacf-27f4-499a-a749-e3967cab9060",
       "userId": "user_1744096294472",
       "date": {
@@ -28030,19 +28017,6 @@
       "price": 1000000,
       "category": "카페&디저트",
       "memo": "asd"
-    },
-    {
-      "id": "txn1744244065616",
-      "userId": "user_1744088726036",
-      "date": {
-        "year": "2025",
-        "month": "04",
-        "day": "10"
-      },
-      "type": "expense",
-      "price": 1000000,
-      "category": "쇼핑",
-      "memo": "asdd"
     }
   ]
 }
