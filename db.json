@@ -62,6 +62,15 @@
       "phone": "010-2222-3333",
       "password": "1234",
       "profileImage": "profile1.png"
+    },
+    {
+      "id": "user_1744248278088",
+      "name": "박지준",
+      "email": "zxcv@naver.com",
+      "birth": "2004-02-10",
+      "phone": "010-1234-1234",
+      "password": "1234",
+      "profileImage": "profile4.png"
     }
   ],
   "transactions": [
@@ -28017,6 +28026,110 @@
       "price": 1000000,
       "category": "카페&디저트",
       "memo": "asd"
+    },
+    {
+      "id": "txn1744248307295",
+      "userId": "user_1744248278088",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "10"
+      },
+      "type": "income",
+      "price": 1000000,
+      "category": "월급",
+      "memo": ""
+    },
+    {
+      "id": "txn1744248443689",
+      "userId": "user_1744248278088",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "10"
+      },
+      "type": "expense",
+      "price": 100000,
+      "category": "식비",
+      "memo": "회식"
+    },
+    {
+      "id": "txn1744248710676",
+      "userId": "user_1744248278088",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "10"
+      },
+      "type": "expense",
+      "price": 4000,
+      "category": "교통",
+      "memo": "왕복 교통비"
+    },
+    {
+      "id": "txn1744248741282",
+      "userId": "user_1744248278088",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "10"
+      },
+      "type": "expense",
+      "price": 100000,
+      "category": "쇼핑",
+      "memo": "무신사"
+    },
+    {
+      "id": "txn1744248759193",
+      "userId": "user_1744248278088",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "10"
+      },
+      "type": "expense",
+      "price": 150000,
+      "category": "문화생활",
+      "memo": "뮤지컬"
+    },
+    {
+      "id": "txn1744248774268",
+      "userId": "user_1744248278088",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "10"
+      },
+      "type": "expense",
+      "price": 10000,
+      "category": "공과금",
+      "memo": "공과금"
+    },
+    {
+      "id": "txn1744248789117",
+      "userId": "user_1744248278088",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "10"
+      },
+      "type": "expense",
+      "price": 8000,
+      "category": "병원",
+      "memo": "감기ㅜㅠ"
+    },
+    {
+      "id": "txn1744248823114",
+      "userId": "user_1744248278088",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "10"
+      },
+      "type": "expense",
+      "price": 24500,
+      "category": "카페&디저트",
+      "memo": "딸기 케이크 "
     }
   ]
 }
