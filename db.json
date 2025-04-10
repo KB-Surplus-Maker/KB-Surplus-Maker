@@ -53,6 +53,15 @@
       "phone": "010-1234-5678",
       "password": "catcatcat",
       "profileImage": "profile1.png"
+    },
+    {
+      "id": "user_1744246398384",
+      "name": "임창진",
+      "email": "ckdwls@naver.com",
+      "birth": "2025-04-09",
+      "phone": "010-2222-3333",
+      "password": "1234",
+      "profileImage": "profile1.png"
     }
   ],
   "transactions": [
