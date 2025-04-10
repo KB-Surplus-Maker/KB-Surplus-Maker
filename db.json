@@ -5251,20 +5251,6 @@
       "memo": "계획된 소비"
     },
     {
-      "id": "9e0c0ffa-cc8f-4449-a07c-fda8b92652e1",
-      "userId": "user_1744096294472",
-      "date": {
-        "year": "2025",
-        "month": "04",
-        "day": "10"
-      },
-      "type": "expense",
-      "price": 758314,
-      "category": "식비",
-      "emoji": "🤬",
-      "memo": "기분 좋은 하루"
-    },
-    {
       "id": "f5572c71-933f-4b1c-9c27-510d94fdcff4",
       "userId": "user_1744088726036",
       "date": {
@@ -6581,20 +6567,6 @@
       "memo": "급하게 쓴 돈"
     },
     {
-      "id": "eb98e1c5-ccd8-4ce4-aa7c-9abc3418ca6c",
-      "userId": "user_1744088726036",
-      "date": {
-        "year": "2025",
-        "month": "04",
-        "day": "10"
-      },
-      "type": "income",
-      "price": 908715,
-      "category": "기타",
-      "emoji": "🤕",
-      "memo": "급하게 쓴 돈"
-    },
-    {
       "id": "43bf56ee-ae95-4903-8301-6798e7aff0b9",
       "userId": "user_1744096294472",
       "date": {
@@ -7547,19 +7519,6 @@
       "memo": "급하게 쓴 돈"
     },
     {
-      "id": "4676eb9b-2910-4f96-910e-7904147be7f7",
-      "userId": "user_1744075392534",
-      "date": {
-        "year": "2025",
-        "month": "4",
-        "day": "10"
-      },
-      "type": "expense",
-      "price": 762255,
-      "category": "식비",
-      "memo": "밥"
-    },
-    {
       "id": "5835ec36-5e61-4967-8bd8-b2f74d6079f8",
       "userId": "user_1744075392534",
       "date": {
@@ -7907,20 +7866,6 @@
       "price": 394801,
       "category": "카페&디저트",
       "emoji": "🤬",
-      "memo": "기분 좋은 하루"
-    },
-    {
-      "id": "af597c66-2e3e-44d5-92f4-6e9b24fe6b1c",
-      "userId": "user_1744075392534",
-      "date": {
-        "year": "2025",
-        "month": "04",
-        "day": "10"
-      },
-      "type": "expense",
-      "price": 373043,
-      "category": "기타",
-      "emoji": "😭",
       "memo": "기분 좋은 하루"
     },
     {
@@ -28052,43 +27997,43 @@
       "memo": "급하게 쓴 돈"
     },
     {
-      "id": "txn1744187051010",
-      "userId": "user1",
+      "id": "txn1744243545015",
+      "userId": "user_1744088726036",
       "date": {
         "year": "2025",
-        "month": "04",
-        "day": "09"
+        "month": "4",
+        "day": "9"
       },
       "type": "income",
-      "price": 3333,
-      "category": "월급",
-      "memo": "3333"
+      "price": 300000,
+      "category": "용돈",
+      "memo": "용돈"
     },
     {
-      "id": "txn1744187137316",
-      "userId": "user1",
+      "id": "txn1744244037258",
+      "userId": "user_1744088726036",
       "date": {
         "year": "2025",
         "month": "04",
         "day": "09"
       },
       "type": "expense",
-      "price": 13000,
-      "category": "식비",
-      "memo": "고등어 ㅎㅎ"
+      "price": 1000000,
+      "category": "카페&디저트",
+      "memo": "asd"
     },
     {
-      "id": "txn1744187176001",
-      "userId": "user1",
+      "id": "txn1744244065616",
+      "userId": "user_1744088726036",
       "date": {
         "year": "2025",
         "month": "04",
         "day": "10"
       },
       "type": "expense",
-      "price": 1400,
-      "category": "교통",
-      "memo": "지옥철 ㅜ"
+      "price": 1000000,
+      "category": "쇼핑",
+      "memo": "asdd"
     }
   ]
 }

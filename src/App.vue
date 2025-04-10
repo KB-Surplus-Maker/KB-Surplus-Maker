@@ -74,6 +74,8 @@ watch(
   },
   { immediate: true } // 앱 시작 시 바로 실행
 );
+
+console.log(transactionStore.curMonthIncomeList);
 </script>
 
 <style>

@@ -91,6 +91,8 @@
 
 <script setup>
 import { ref, watch, computed } from 'vue';
+import { useTransactionStore } from '@/stores/transactions';
+import { useUserStore } from '@/stores/userStore';
 import axios from 'axios';
 import '@/assets/modal.css';
 
@@ -99,6 +101,8 @@ const props = defineProps({
   transaction: Object,
 });
 
+const transactionStore = useTransactionStore();
+const userStore = useUserStore();
 const emit = defineEmits(['close', 'save']);
 const editableTransaction = ref({ ...props.transaction }); // ✅ 먼저 선언!
 
@@ -181,6 +185,7 @@ const saveChanges = async () => {
     emit('updateSuccess');
     isEditing.value = false;
     emit('close');
+    transactionStore.fetchTransactionListByUserId(userStore.currentUser.id);
     window.location.reload(); // 전체 페이지 새로고침
   } catch (error) {
     console.error('수정 실패:', error);

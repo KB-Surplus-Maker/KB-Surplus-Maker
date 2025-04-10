@@ -41,17 +41,27 @@ import DonutChart from '@/components/DonutChart.vue';
 import TransactionList from '@/components/TransactionList.vue';
 import LineChart from '@/components/LineChart.vue';
 import { useTransactionStore } from '@/stores/transactions';
-import { computed, reactive } from 'vue';
+import { useUserStore } from '@/stores/userStore';
+import { computed, reactive, onMounted } from 'vue';
 import MonthSelector from '@/components/MonthSelector.vue';
 import Summary from '@/components/Summary.vue';
 
 const transactionsStore = useTransactionStore();
+const userStore = useUserStore();
 const curMonthExpenses = computed(() => transactionsStore.curMonthExpenseList);
 const curMonthIncomes = computed(() => transactionsStore.curMonthIncomeList);
 
 const visibleLines = reactive({
   expense: true,
   income: false,
+});
+
+onMounted(async () => {
+  await transactionsStore.fetchTransactionListByUserId(
+    userStore.currentUser.id
+  );
+
+  console.log(curMonthIncomes.value);
 });
 
 const chartData = computed(() => {

@@ -73,6 +73,7 @@
 import { defineProps, defineEmits, reactive } from 'vue';
 import axios from 'axios';
 import '@/assets/modal.css';
+import { useUserStore } from '@/stores/userStore';
 
 //수입, 지출 카테고리
 const incomeCategories = ['월급', '보너스', '용돈', '투자수익', '기타'];
@@ -86,6 +87,8 @@ const expenseCategories = [
   '병원',
   '기타',
 ];
+
+const userStore = useUserStore();
 
 //props & emit
 const props = defineProps({
@@ -114,7 +117,7 @@ function parseDate(dateStr) {
 const saveTransaction = async () => {
   const transaction = {
     id: `txn${Date.now()}`,
-    userId: 'user1', // Todo: 로그인된 사용자 ID로 동적 변경 기능 추가
+    userId: userStore.currentUser.id, // Todo: 로그인된 사용자 ID로 동적 변경 기능 추가
     date: parseDate(form.date),
     type: form.type === '수입' ? 'income' : 'expense',
     price: parseInt(form.price),
