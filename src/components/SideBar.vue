@@ -52,7 +52,7 @@
       </li> -->
     </ul>
 
-    <div class="dropdown user-profile">
+    <div class="dropdown user-profile" v-if="user.currentUser != null">
       <hr />
       <a
         href="#"
@@ -70,7 +70,7 @@
           height="32"
           class="rounded-circle me-2"
         />
-        <strong>{{ user.currentUser?.name || "사용자" }}</strong>
+        <strong>{{ user.currentUser?.name || '사용자' }}</strong>
       </a>
       <ul class="dropdown-menu text-small shadow">
         <li><a class="dropdown-item" @click="goToProfile()">프로필 설정</a></li>
@@ -82,21 +82,21 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from "vue-router";
-import { useUserStore } from "@/stores/userStore";
+import { useRoute, useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/userStore';
 
 const route = useRoute();
 const router = useRouter();
 
 const goToProfile = () => {
-  router.push("/profile");
+  router.push('/profile');
 };
 
 const user = useUserStore();
 
 const signout = () => {
   user.logout();
-  router.push("/");
+  router.push('/');
 };
 </script>
 
