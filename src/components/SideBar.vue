@@ -51,8 +51,9 @@
         <a @click="goTo('/calendar')" class="nav-link link-dark"> 💸 달력 </a>
       </li> -->
     </ul>
-    <hr />
-    <div class="dropdown">
+
+    <div class="dropdown user-profile">
+      <hr />
       <a
         href="#"
         class="d-flex align-items-center link-dark text-decoration-none dropdown-toggle"
@@ -69,7 +70,7 @@
           height="32"
           class="rounded-circle me-2"
         />
-        <strong>{{ user.currentUser?.name || '사용자' }}</strong>
+        <strong>{{ user.currentUser?.name || "사용자" }}</strong>
       </a>
       <ul class="dropdown-menu text-small shadow">
         <li><a class="dropdown-item" @click="goToProfile()">프로필 설정</a></li>
@@ -81,21 +82,21 @@
 </template>
 
 <script setup>
-import { useRoute, useRouter } from 'vue-router';
-import { useUserStore } from '@/stores/userStore';
+import { useRoute, useRouter } from "vue-router";
+import { useUserStore } from "@/stores/userStore";
 
 const route = useRoute();
 const router = useRouter();
 
 const goToProfile = () => {
-  router.push('/profile');
+  router.push("/profile");
 };
 
 const user = useUserStore();
 
 const signout = () => {
   user.logout();
-  router.push('/');
+  router.push("/");
 };
 </script>
 
@@ -105,5 +106,14 @@ const signout = () => {
 }
 .nav-link {
   cursor: pointer;
+}
+.user-profile {
+  margin-top: auto; /* ✅ 항상 하단 정렬 */
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  background-color: #f8f9fa; /* 보기 좋게 배경 추가(Optional) */
+  position: sticky; /* ✅ 스크롤 시 아래 고정 효과 */
+  bottom: 0;
+  z-index: 1;
 }
 </style>
