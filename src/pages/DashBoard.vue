@@ -53,7 +53,7 @@ const curMonthIncomes = computed(() => transactionsStore.curMonthIncomeList);
 
 const visibleLines = reactive({
   expense: true,
-  income: false,
+  income: true,
 });
 
 const chartData = computed(() => {
