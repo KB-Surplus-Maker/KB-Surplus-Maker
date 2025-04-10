@@ -108,6 +108,15 @@ const chartOptions = {
     title: {
       display: true,
       text: '일별 지출/수입 내역',
+      font: {
+        size: 18,
+        weight: 'bold',
+      },
+      padding: {
+        top: 16,
+        bottom: 10,
+      },
+      color: '#333',
     },
   },
 };
