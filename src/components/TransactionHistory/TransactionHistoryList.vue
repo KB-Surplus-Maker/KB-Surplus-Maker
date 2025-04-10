@@ -70,12 +70,14 @@
 <script setup>
 import TransactionHistoryItems from './TransactionHistoryItems.vue';
 import TransactionDetailModal from '@/components/TransactionDetailModal.vue';
+import { useUserStore } from '@/stores/userStore.js';
 import { computed, ref, watch, onMounted } from 'vue';
 import { defineProps, defineEmits } from 'vue';
 import axios from 'axios';
 
 const tableData = ref([]);
 const emit = defineEmits(['update:tableData', 'update:categories']);
+const userStore = useUserStore();
 
 const props = defineProps({
   selectedCategory: { type: String, default: 'all' },
@@ -150,15 +152,17 @@ watch(
 );
 
 onMounted(async () => {
-  await requestAPI();
+  // console.log(typeof userStore.currentUser.id);
+  await requestAPI(userStore.currentUser.id);
   emit('update:tableData', tableData.value);
   const categories = [...new Set(tableData.value.map((item) => item.category))];
   emit('update:categories', categories);
 });
 
-const requestAPI = async () => {
-  const url = 'http://localhost:3000/transactions';
+const requestAPI = async (userId) => {
+  const url = `/api/transactions?userId=${userId}`;
   const response = await axios.get(url);
+  console.log(response.data);
   tableData.value = response.data;
 };
 
