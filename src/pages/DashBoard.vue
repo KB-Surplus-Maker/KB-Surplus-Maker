@@ -56,14 +56,6 @@ const visibleLines = reactive({
   income: false,
 });
 
-onMounted(async () => {
-  await transactionsStore.fetchTransactionListByUserId(
-    userStore.currentUser.id
-  );
-
-  console.log(curMonthIncomes.value);
-});
-
 const chartData = computed(() => {
   const daily = Array.from({ length: 31 }, () => ({ expense: 0, income: 0 }));
 

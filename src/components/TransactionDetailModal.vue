@@ -185,7 +185,6 @@ const saveChanges = async () => {
     emit('updateSuccess');
     isEditing.value = false;
     emit('close');
-    transactionStore.fetchTransactionListByUserId(userStore.currentUser.id);
     window.location.reload(); // 전체 페이지 새로고침
   } catch (error) {
     console.error('수정 실패:', error);
