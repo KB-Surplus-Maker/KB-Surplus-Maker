@@ -1,4 +1,3 @@
-<!-- ./components/TransactionDetailModal.vue -->
 <template>
   <teleport to="body">
     <div v-if="show" class="modal-backdrop">
@@ -14,7 +13,7 @@
           <p>
             <strong>날짜:</strong> {{ formatDate(editableTransaction.date) }}
           </p>
-          <!--분류: 라디오 버튼-->
+
           <label><strong>분류:</strong></label>
           <template v-if="isEditing">
             <div>
@@ -41,13 +40,13 @@
           </template>
 
           <label><strong>금액:</strong></label>
-          <template v-if="isEditing"
-            ><input v-model.number="editableTransaction.price" type="number" />
+          <template v-if="isEditing">
+            <input v-model.number="editableTransaction.price" type="number" />
           </template>
           <template v-else>
             <p>{{ editableTransaction.price.toLocaleString() }}원</p>
           </template>
-          <!--카테고리: select -->
+
           <label><strong>카테고리:</strong></label>
           <template v-if="isEditing">
             <select v-model="editableTransaction.category">
@@ -74,15 +73,26 @@
           </template>
         </div>
 
-        <!-- 하단 버튼 -->
-        <div class="modal-actions">
-          <button class="cancel-button" @click="$emit('close')">닫기</button>
-          <template v-if="isEditing">
-            <button class="save-button" @click="saveChanges">저장</button>
-          </template>
-          <template v-else>
-            <button class="save-button" @click="enableEdit">수정</button>
-          </template>
+        <div class="modal-actions d-flex justify-content-between">
+          <!-- 왼쪽: 삭제 -->
+          <div>
+            <template v-if="!isEditing">
+              <button class="delete-button" @click="deleteTransaction">
+                삭제
+              </button>
+            </template>
+          </div>
+
+          <!-- 오른쪽: 닫기 / 저장 / 수정 -->
+          <div class="d-flex gap-2">
+            <button class="cancel-button" @click="$emit('close')">닫기</button>
+            <template v-if="isEditing">
+              <button class="save-button" @click="saveChanges">저장</button>
+            </template>
+            <template v-else>
+              <button class="save-button" @click="enableEdit">수정</button>
+            </template>
+          </div>
         </div>
       </div>
     </div>
@@ -90,11 +100,11 @@
 </template>
 
 <script setup>
-import { ref, watch, computed } from 'vue';
-import { useTransactionStore } from '@/stores/transactions';
-import { useUserStore } from '@/stores/userStore';
-import axios from 'axios';
-import '@/assets/modal.css';
+import { ref, watch, computed } from "vue";
+import { useTransactionStore } from "@/stores/transactions";
+import { useUserStore } from "@/stores/userStore";
+import axios from "axios";
+import "@/assets/modal.css";
 
 const props = defineProps({
   show: Boolean,
@@ -103,46 +113,41 @@ const props = defineProps({
 
 const transactionStore = useTransactionStore();
 const userStore = useUserStore();
-const emit = defineEmits(['close', 'save']);
-const editableTransaction = ref({ ...props.transaction }); // ✅ 먼저 선언!
-
+const emit = defineEmits(["close", "save", "updateSuccess"]);
+const editableTransaction = ref({ ...props.transaction });
 const isEditing = ref(false);
 
-// 분류에 따라 카테고리 옵션 반환
-const incomeCategories = ['월급', '보너스', '용돈', '투자수익', '기타'];
+const incomeCategories = ["월급", "보너스", "용돈", "투자수익", "기타"];
 const expenseCategories = [
-  '식비',
-  '교통',
-  '카페&디저트',
-  '쇼핑',
-  '문화생활',
-  '공과금',
-  '병원',
-  '기타',
+  "식비",
+  "교통",
+  "카페&디저트",
+  "쇼핑",
+  "문화생활",
+  "공과금",
+  "병원",
+  "기타",
 ];
 
 const categoryOptions = computed(() => {
-  if (editableTransaction.value.type === 'income') return incomeCategories;
-  if (editableTransaction.value.type === 'expense') return expenseCategories;
+  if (editableTransaction.value.type === "income") return incomeCategories;
+  if (editableTransaction.value.type === "expense") return expenseCategories;
   return [];
 });
 
-//  type 변경 시 category 초기화
 watch(
   () => editableTransaction.value.type,
   (newType, oldType) => {
-    // 새로 선택한 타입이 기존과 다르고, 현재 새 입력 중일 때만 초기화
     if (
       isEditing.value &&
-      (newType === 'income' || newType === 'expense') &&
+      (newType === "income" || newType === "expense") &&
       newType !== oldType
     ) {
-      editableTransaction.value.category = '';
+      editableTransaction.value.category = "";
     }
   }
 );
 
-// props.transaction이 바뀌면 재설정
 watch(
   () => props.transaction,
   (newTransaction) => {
@@ -156,12 +161,12 @@ const enableEdit = () => {
   isEditing.value = true;
 };
 
-//저장
 const saveChanges = async () => {
   if (!editableTransaction.value.category) {
-    alert('카테고리를 선택해 주세요.');
+    alert("카테고리를 선택해 주세요.");
     return;
   }
+
   try {
     const cleanedData = {
       id: editableTransaction.value.id,
@@ -182,30 +187,51 @@ const saveChanges = async () => {
       cleanedData
     );
 
-    emit('updateSuccess');
+    emit("updateSuccess");
     isEditing.value = false;
-    emit('close');
+    emit("close");
     transactionStore.fetchTransactionListByUserId(userStore.currentUser.id);
-    window.location.reload(); // 전체 페이지 새로고침
+    window.location.reload();
   } catch (error) {
-    console.error('수정 실패:', error);
-    alert('서버에 저장 실패!');
+    console.error("수정 실패:", error);
+    alert("서버에 저장 실패!");
+  }
+};
+
+const deleteTransaction = async () => {
+  const confirmed = confirm("정말 삭제하시겠어요?");
+  if (!confirmed) return;
+
+  try {
+    await axios.delete(
+      `http://localhost:3000/transactions/${editableTransaction.value.id}`
+    );
+    alert("삭제되었습니다.");
+
+    emit("updateSuccess");
+    emit("close");
+    transactionStore.fetchTransactionListByUserId(userStore.currentUser.id);
+    window.location.reload();
+  } catch (error) {
+    console.error("삭제 실패:", error);
+    alert("삭제 중 오류가 발생했습니다.");
   }
 };
 
 const formatDate = (date) => {
-  return `${date.year}.${date.month.padStart(2, '0')}.${date.day.padStart(
+  return `${date.year}.${date.month.padStart(2, "0")}.${date.day.padStart(
     2,
-    '0'
+    "0"
   )}`;
 };
 
 const typeText = (val) =>
-  val === 'income' ? '수입' : val === 'expense' ? '지출' : '';
+  val === "income" ? "수입" : val === "expense" ? "지출" : "";
 </script>
 
 <style scoped>
-@import '@/assets/modal.css';
+@import "@/assets/modal.css";
+
 .modal-header button {
   background: none;
   border: none;
@@ -221,7 +247,8 @@ const typeText = (val) =>
   color: #333;
 }
 
-.modal-body input {
+.modal-body input,
+.modal-body select {
   padding: 0.4rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -243,7 +270,6 @@ const typeText = (val) =>
   font-weight: 500;
   cursor: pointer;
 }
-
 .cancel-button:hover {
   background: #f0f6ff;
 }
@@ -257,8 +283,20 @@ const typeText = (val) =>
   font-weight: 500;
   cursor: pointer;
 }
-
 .save-button:hover {
   background: #002855;
+}
+
+.delete-button {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.delete-button:hover {
+  background: #bb2d3b;
 }
 </style>

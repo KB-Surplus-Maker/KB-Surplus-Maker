@@ -28021,19 +28021,6 @@
       "price": 1000000,
       "category": "카페&디저트",
       "memo": "asd"
-    },
-    {
-      "id": "txn1744244065616",
-      "userId": "user_1744088726036",
-      "date": {
-        "year": "2025",
-        "month": "04",
-        "day": "10"
-      },
-      "type": "expense",
-      "price": 1000000,
-      "category": "쇼핑",
-      "memo": "asdd"
     }
   ]
 }
