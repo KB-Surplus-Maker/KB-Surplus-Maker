@@ -35,13 +35,27 @@
       </div>
     </div>
 
-    <!-- 🔁 정렬 토글 버튼 -->
+    <!-- 🔁 정렬 기준 + 정렬 토글 -->
     <div
-      class="d-flex justify-content-end mb-2"
+      class="d-flex justify-content-end align-items-center gap-2 mb-2"
       v-if="filteredTransactions.length"
     >
-      <button class="btn btn-sm btn-outline-secondary" @click="toggleSortOrder">
-        {{ sortDesc ? '최신순 🔽' : '오래된순 🔼' }}
+      <select
+        v-model="sortBy"
+        class="form-select form-select-sm"
+        style="width: 160px"
+      >
+        <option value="date">날짜순</option>
+        <option value="priceAsc">금액 오름차순</option>
+        <option value="priceDesc">금액 내림차순</option>
+      </select>
+
+      <button
+        class="btn btn-sm btn-outline-secondary"
+        @click="toggleSortOrder"
+        v-if="sortBy === 'date'"
+      >
+        {{ sortDesc ? "최신순 🔽" : "오래된순 🔼" }}
       </button>
     </div>
 
@@ -60,7 +74,7 @@
         <tbody>
           <tr v-for="txn in paginatedTransactions" :key="txn.id">
             <td>{{ formatDate(txn.date) }}</td>
-            <td>{{ txn.type === 'income' ? '수입' : '지출' }}</td>
+            <td>{{ txn.type === "income" ? "수입" : "지출" }}</td>
             <td :class="txn.type === 'income' ? 'text-success' : 'text-danger'">
               ₩{{ txn.price.toLocaleString() }}
             </td>
@@ -107,55 +121,41 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import axios from 'axios';
-import { useUserStore } from '@/stores/userStore';
+import { ref, computed, watch } from "vue";
+import axios from "axios";
+import { useUserStore } from "@/stores/userStore";
 
 const userStore = useUserStore();
-const startDate = ref('');
-const endDate = ref('');
+const startDate = ref("");
+const endDate = ref("");
 const transactions = ref([]);
 const filteredTransactions = ref([]);
 const currentPage = ref(1);
 const itemsPerPage = 10;
+
 const sortDesc = ref(true);
+const sortBy = ref("date"); // 'date', 'priceAsc', 'priceDesc'
 
 const incomeCategories = [
-  '전체 수입',
-  '월급',
-  '보너스',
-  '용돈',
-  '투자수익',
-  '기타',
+  "전체 수입",
+  "월급",
+  "보너스",
+  "용돈",
+  "투자수익",
+  "기타",
 ];
 const expenseCategories = [
-  '전체 지출',
-  '카페&디저트',
-  '쇼핑',
-  '공과금',
-  '교통',
-  '문화생활',
-  '병원',
-  '식비',
+  "전체 지출",
+  "카페&디저트",
+  "쇼핑",
+  "공과금",
+  "교통",
+  "문화생활",
+  "병원",
+  "식비",
 ];
 
-// const categories = [
-//   '전체',
-//   '카페&디저트',
-//   '쇼핑',
-//   '공과금',
-//   '교통',
-//   '월급',
-//   '문화생활',
-//   '생활',
-//   '기타',
-//   '용돈',
-//   '병원',
-//   '투자수익',
-//   '보너스',
-//   '식비',
-// ];
-const selectedCategory = ref('전체');
+const selectedCategory = ref("전체");
 
 // 거래 가져오기
 const fetchTransactions = async () => {
@@ -176,12 +176,12 @@ const filterTransactions = () => {
     const tDate = new Date(`${t.date.year}-${t.date.month}-${t.date.day}`);
     const inDateRange = tDate >= start && tDate <= end;
     let inCategory = false;
-    if (selectedCategory.value === '전체') {
+    if (selectedCategory.value === "전체") {
       inCategory = true;
-    } else if (selectedCategory.value === '전체 수입') {
-      inCategory = t.type === 'income';
-    } else if (selectedCategory.value === '전체 지출') {
-      inCategory = t.type === 'expense';
+    } else if (selectedCategory.value === "전체 수입") {
+      inCategory = t.type === "income";
+    } else if (selectedCategory.value === "전체 지출") {
+      inCategory = t.type === "expense";
     } else {
       inCategory = t.category === selectedCategory.value;
     }
@@ -193,25 +193,38 @@ const filterTransactions = () => {
   currentPage.value = 1;
 };
 
-// 정렬
+// 정렬 함수
 const sortFilteredTransactions = () => {
   filteredTransactions.value.sort((a, b) => {
-    const dateA = new Date(`${a.date.year}-${a.date.month}-${a.date.day}`);
-    const dateB = new Date(`${b.date.year}-${b.date.month}-${b.date.day}`);
-    return sortDesc.value ? dateB - dateA : dateA - dateB;
+    if (sortBy.value === "date") {
+      const dateA = new Date(`${a.date.year}-${a.date.month}-${a.date.day}`);
+      const dateB = new Date(`${b.date.year}-${b.date.month}-${b.date.day}`);
+      return sortDesc.value ? dateB - dateA : dateA - dateB;
+    } else if (sortBy.value === "priceAsc") {
+      return a.price - b.price;
+    } else if (sortBy.value === "priceDesc") {
+      return b.price - a.price;
+    }
+    return 0;
   });
 };
 
+// 정렬 토글
 const toggleSortOrder = () => {
   sortDesc.value = !sortDesc.value;
   sortFilteredTransactions();
 };
 
-// 날짜 출력 형식
+// 정렬 기준 변경 시 자동 반영
+watch(sortBy, () => {
+  sortFilteredTransactions();
+});
+
+// 날짜 포맷
 const formatDate = (date) => {
-  return `${date.year}-${String(date.month).padStart(2, '0')}-${String(
+  return `${date.year}-${String(date.month).padStart(2, "0")}-${String(
     date.day
-  ).padStart(2, '0')}`;
+  ).padStart(2, "0")}`;
 };
 
 // 페이지네이션
