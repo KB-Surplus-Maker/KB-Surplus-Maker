@@ -49,7 +49,11 @@ export const useUserStore = defineStore("user", {
       console.log("응답:", res.data); // ✅ 추가
 
       if (res.data.length === 1) {
-        this.currentUser = res.data[0];
+        // this.currentUser = res.data[0];
+        const user = { ...res.data[0] }; // 객체 복사
+        delete user.password; // ✅ 비밀번호 제거
+
+        this.currentUser = user;
 
         console.log("로그인 성공, 사용자:", this.currentUser); // ✅ 추가
         localStorage.setItem("currentUser", JSON.stringify(this.currentUser)); // ✅ 추가
