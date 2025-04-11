@@ -120,7 +120,14 @@ const currentPage = ref(1);
 const itemsPerPage = 10;
 const sortDesc = ref(true);
 
-const incomeCategories = ['월급', '보너스', '용돈', '투자수익', '기타'];
+const incomeCategories = [
+  '전체 수입',
+  '월급',
+  '보너스',
+  '용돈',
+  '투자수익',
+  '기타',
+];
 const expenseCategories = [
   '전체 지출',
   '카페&디저트',
@@ -168,9 +175,17 @@ const filterTransactions = () => {
   filteredTransactions.value = transactions.value.filter((t) => {
     const tDate = new Date(`${t.date.year}-${t.date.month}-${t.date.day}`);
     const inDateRange = tDate >= start && tDate <= end;
-    const inCategory =
-      selectedCategory.value === '전체' ||
-      t.category === selectedCategory.value;
+    let inCategory = false;
+    if (selectedCategory.value === '전체') {
+      inCategory = true;
+    } else if (selectedCategory.value === '전체 수입') {
+      inCategory = t.type === 'income';
+    } else if (selectedCategory.value === '전체 지출') {
+      inCategory = t.type === 'expense';
+    } else {
+      inCategory = t.category === selectedCategory.value;
+    }
+
     return inDateRange && inCategory;
   });
 
