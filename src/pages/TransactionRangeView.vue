@@ -15,9 +15,16 @@
       <div class="col">
         <label class="form-label">카테고리</label>
         <select v-model="selectedCategory" class="form-select">
-          <option v-for="cat in categories" :key="cat" :value="cat">
-            {{ cat }}
-          </option>
+          <optgroup label="수입">
+            <option v-for="cat in incomeCategories" :key="cat" :value="cat">
+              {{ cat }}
+            </option>
+          </optgroup>
+          <optgroup label="지출">
+            <option v-for="cat in expenseCategories" :key="cat" :value="cat">
+              {{ cat }}
+            </option>
+          </optgroup>
         </select>
       </div>
       <div class="col-auto d-flex align-items-end">
@@ -112,20 +119,31 @@ const currentPage = ref(1);
 const itemsPerPage = 10;
 const sortDesc = ref(true);
 
+const incomeCategories = ['월급', '보너스', '용돈', '투자수익', '기타'];
+const expenseCategories = [
+  '카페&디저트',
+  '쇼핑',
+  '공과금',
+  '교통',
+  '문화생활',
+  '병원',
+  '식비',
+];
+
 const categories = [
   '전체',
   '카페&디저트',
   '쇼핑',
   '공과금',
   '교통',
-  '월급',
+  // '월급',
   '문화생활',
   '생활',
   '기타',
-  '용돈',
+  // '용돈',
   '병원',
-  '투자수익',
-  '보너스',
+  // '투자수익',
+  // '보너스',
   '식비',
 ];
 const selectedCategory = ref('전체');
