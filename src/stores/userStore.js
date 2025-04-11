@@ -76,7 +76,7 @@ export const useUserStore = defineStore("user", {
       };
 
       await axios.post("http://localhost:3000/users", newUser);
-      this.currentUser = newUser;
+      // this.currentUser = newUser;
     },
 
     // ✅ 로그아웃
