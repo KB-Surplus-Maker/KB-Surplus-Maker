@@ -29,6 +29,7 @@
     <div class="home">
       <AddButton @click="openModal" />
       <TransactionForm :show="showModal" @close="closeModal" />
+      <br />
     </div>
   </div>
 </template>

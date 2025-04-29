@@ -6,8 +6,8 @@
       "email": "sangwuny@naver.com",
       "birth": "2001-04-14",
       "phone": "010-4930-0640",
-      "profileImage": "profile2.png",
-      "password": "1234"
+      "password": "1234",
+      "profileImage": "profile2.png"
     },
     {
       "id": "user_1744088486759",
@@ -24,8 +24,8 @@
       "email": "qwer@naver.com",
       "birth": "2025-04-09",
       "phone": "010-0000-0000",
-      "password": "1234",
-      "profileImage": "profile2.png"
+      "profileImage": "profile4.png",
+      "password": "1234"
     },
     {
       "id": "user_1744096294472",
@@ -78,6 +78,15 @@
       "email": "zzzz@naver.com",
       "birth": "2025-04-11",
       "phone": "010-1234-1234",
+      "password": "1234",
+      "profileImage": "profile1.png"
+    },
+    {
+      "id": "user_1744355314271",
+      "name": "케이비",
+      "email": "KB@naver.com",
+      "birth": "2025-04-04",
+      "phone": "010-1111-1111",
       "password": "1234",
       "profileImage": "profile1.png"
     }
@@ -28139,6 +28148,32 @@
       "price": 24500,
       "category": "카페&디저트",
       "memo": "딸기 케이크 "
+    },
+    {
+      "id": "txn1744355389867",
+      "userId": "user_1744355314271",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "11"
+      },
+      "type": "income",
+      "price": 1000,
+      "category": "보너스",
+      "memo": "메모"
+    },
+    {
+      "id": "txn1744355404300",
+      "userId": "user_1744355314271",
+      "date": {
+        "year": "2025",
+        "month": "04",
+        "day": "11"
+      },
+      "type": "income",
+      "price": 200000,
+      "category": "월급",
+      "memo": "메모2"
     }
   ]
 }
