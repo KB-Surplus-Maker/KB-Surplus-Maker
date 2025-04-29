@@ -31,6 +31,7 @@
       <TransactionForm :show="showModal" @close="closeModal" />
     </div>
     <br />
+    <br />
   </div>
 </template>
 
